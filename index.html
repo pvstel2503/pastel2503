@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,8 +32,8 @@ padding:60px 20px 25px;
 
 .logo{
 width:180px;
-margin-bottom:10px;
-filter:drop-shadow(0 10px 25px rgba(247,183,195,0.25));
+margin-bottom:12px;
+filter:drop-shadow(0 10px 25px rgba(247,183,195,.25));
 }
 
 h1{
@@ -53,14 +55,14 @@ margin-top:25px;
 }
 
 .nav button{
-background:rgba(255,255,255,0.07);
-border:1px solid rgba(255,255,255,0.12);
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.12);
 color:white;
 padding:10px 14px;
 border-radius:14px;
 cursor:pointer;
 font-weight:bold;
-transition:0.25s;
+transition:.25s;
 }
 
 .nav button:hover{
@@ -79,9 +81,9 @@ padding:20px;
 display:none;
 opacity:0;
 transform:translateY(20px);
-transition:0.4s ease;
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.08);
+transition:.4s ease;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
 border-radius:18px;
 padding:22px;
 margin-bottom:20px;
@@ -96,13 +98,13 @@ transform:translateY(0);
 
 h2{
 color:#F7B7C3;
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
 p{
+line-height:1.6;
 color:#d6d6d6;
-margin-bottom:12px;
-line-height:1.5;
+margin-bottom:15px;
 }
 
 .option{
@@ -112,13 +114,14 @@ align-items:center;
 padding:12px;
 margin-top:8px;
 border-radius:12px;
-background:rgba(0,0,0,0.25);
-border:1px solid rgba(255,255,255,0.06);
+background:rgba(0,0,0,.25);
+border:1px solid rgba(255,255,255,.06);
 }
 
 .option label{
 flex:1;
 padding-right:15px;
+font-size:.95rem;
 }
 
 input[type=checkbox]{
@@ -127,13 +130,18 @@ height:18px;
 accent-color:#F7B7C3;
 }
 
+input[type=checkbox]:disabled{
+opacity:.4;
+cursor:not-allowed;
+}
+
 select{
 width:100%;
 padding:12px;
 border-radius:12px;
-background:rgba(0,0,0,0.3);
+background:rgba(0,0,0,.3);
 color:white;
-border:1px solid rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,.1);
 margin-top:10px;
 }
 
@@ -147,19 +155,19 @@ gap:22px;
 position:relative;
 border-radius:16px;
 overflow:hidden;
-transition:0.3s;
+transition:.3s;
 }
 
 .portfolio-item:hover{
 transform:scale(1.03);
-box-shadow:0 15px 40px rgba(0,0,0,0.5);
+box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
 
 .video{
 height:220px;
 border-radius:16px;
 overflow:hidden;
-border:1px solid rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,.08);
 }
 
 .video iframe{
@@ -172,17 +180,17 @@ border:none;
 position:absolute;
 top:10px;
 left:10px;
-background:rgba(0,0,0,0.55);
+background:rgba(0,0,0,.55);
 padding:6px 10px;
 border-radius:20px;
 font-size:11px;
 color:#F7B7C3;
-border:1px solid rgba(247,183,195,0.25);
+border:1px solid rgba(247,183,195,.25);
 }
 
 .portfolio-label{
 font-size:11px;
-color:#888;
+color:#9f9f9f;
 margin-top:10px;
 padding-left:8px;
 line-height:1.4;
@@ -193,17 +201,17 @@ position:fixed;
 bottom:0;
 left:0;
 right:0;
-background:rgba(10,10,10,0.9);
+background:rgba(10,10,10,.92);
 backdrop-filter:blur(12px);
-border-top:1px solid rgba(255,255,255,0.1);
+border-top:1px solid rgba(255,255,255,.1);
 padding:18px;
 text-align:center;
 }
 
 .total-price{
 font-size:2rem;
-color:#F7B7C3;
 font-weight:bold;
+color:#F7B7C3;
 margin-top:5px;
 }
 
@@ -242,6 +250,7 @@ grid-template-columns:1fr;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -274,8 +283,8 @@ Production Audiovisuelle • Paris
 
 <div class="container">
 
-  <!-- REELS -->
-<div id="reels" class="card active">
+<!-- REELS -->
+<div id="reels" class="card">
 
 <h2>Reels — Contenu court</h2>
 
@@ -289,28 +298,30 @@ Production Audiovisuelle • Paris
 ✔ 1 série de modifications
 </p>
 
-<select onchange="update()">
-
+<select id="reelCount" onchange="update()">
 <option value="200">1 Reel — 200€</option>
-
 <option value="300">2 Reels (si même session) — 300€</option>
-
 <option value="400">3 Reels (si même session) — 400€</option>
-
 <option value="500">4 Reels (si même session) — 500€</option>
-
 <option value="600">5 Reels (si même session) — 600€</option>
-
 </select>
 
 <div class="option">
-<label>Sous-titres automatiques +25€</label>
-<input type="checkbox" value="25" onchange="update()">
+<label>Sous-titres automatiques +25€/reel</label>
+<input
+type="checkbox"
+id="autoSub"
+value="25"
+onchange="subtitlesToggle('auto')">
 </div>
 
 <div class="option">
-<label>Sous-titres animés +50€</label>
-<input type="checkbox" value="50" onchange="update()">
+<label>Sous-titres animés +50€/reel</label>
+<input
+type="checkbox"
+id="animSub"
+value="50"
+onchange="subtitlesToggle('anim')">
 </div>
 
 </div>
@@ -343,13 +354,13 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="option">
-<label>Caméra VHS +120€</label>
-<input type="checkbox" value="120" onchange="update()">
+<label>Sous-titres automatiques du clip +50€</label>
+<input type="checkbox" value="50" onchange="update()">
 </div>
 
 <div class="option">
-<label>FX avancés +200€</label>
-<input type="checkbox" value="200" onchange="update()">
+<label>Caméra VHS +120€</label>
+<input type="checkbox" value="120" onchange="update()">
 </div>
 
 <div class="option">
@@ -378,13 +389,18 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="option">
-<label>Déplacement hors Paris : sur devis</label>
+<label>FX avancés (sur devis)</label>
+<input type="checkbox" disabled>
+</div>
+
+<div class="option">
+<label>Déplacement hors Paris (sur devis)</label>
 <input type="checkbox" disabled>
 </div>
 
 </div>
 
-<!-- PREMIUM -->
+<!-- CLIP PREMIUM -->
 <div id="premium" class="card" data-base="800">
 
 <h2>Clip Premium — 800€</h2>
@@ -400,6 +416,7 @@ Production Audiovisuelle • Paris
 ✔ Montage complet<br>
 ✔ Étalonnage avancé<br>
 ✔ Livraison 4K<br>
+✔ Livraison sous 15 jours<br>
 ✔ 1 reel vertical extrait inclus<br>
 ✔ 2 séries de modifications
 </p>
@@ -415,13 +432,13 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="option">
-<label>Caméra VHS +120€</label>
-<input type="checkbox" value="120" onchange="update()">
+<label>Sous-titres automatiques du clip +50€</label>
+<input type="checkbox" value="50" onchange="update()">
 </div>
 
 <div class="option">
-<label>FX avancés +200€</label>
-<input type="checkbox" value="200" onchange="update()">
+<label>Caméra VHS +120€</label>
+<input type="checkbox" value="120" onchange="update()">
 </div>
 
 <div class="option">
@@ -430,7 +447,7 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="option">
-<label>Backstage +100€</label>
+<label>Backstage / Making-of +100€</label>
 <input type="checkbox" value="100" onchange="update()">
 </div>
 
@@ -450,7 +467,12 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="option">
-<label>Déplacement hors Paris : sur devis</label>
+<label>FX avancés (sur devis)</label>
+<input type="checkbox" disabled>
+</div>
+
+<div class="option">
+<label>Déplacement hors Paris (sur devis)</label>
 <input type="checkbox" disabled>
 </div>
 
@@ -463,7 +485,7 @@ Production Audiovisuelle • Paris
 
 <p>
 ✔ Jusqu’à 4h de présence<br>
-✔ Sony FX3 cinéma<br>
+✔ Sony FX3<br>
 ✔ Captation brute<br>
 ✔ Livraison des rushes sous 72h
 </p>
@@ -479,7 +501,7 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="option">
-<label>Livraison rushes sous 24h +50€</label>
+<label>Livraison des rushes sous 24h +50€</label>
 <input type="checkbox" value="50" onchange="update()">
 </div>
 
@@ -501,7 +523,7 @@ Production Audiovisuelle • Paris
 </div>
 
 <div class="portfolio-label">
-Clip inclus dans l’offre Street Clip — Valeur 500€
+Clip inclus dans l'offre Street Clip — Valeur 500€
 </div>
 
 </div>
@@ -515,7 +537,7 @@ Clip inclus dans l’offre Street Clip — Valeur 500€
 </div>
 
 <div class="portfolio-label">
-Clip inclus dans l’offre Clip Premium — Valeur 800€
+Clip inclus dans l'offre Clip Premium — Valeur 800€
 </div>
 
 </div>
@@ -532,7 +554,7 @@ Clip inclus dans l’offre Clip Premium — Valeur 800€
 <div>Total estimé</div>
 
 <div class="total-price" id="total">
-200€
+—
 </div>
 
 <div class="btns">
@@ -542,7 +564,7 @@ WhatsApp
 </button>
 
 <button class="btn pdf" onclick="generatePDF()">
-PDF
+Télécharger le devis PDF
 </button>
 
 </div>
@@ -565,64 +587,148 @@ update();
 
 }
 
+/* SOUS-TITRES EXCLUSIFS */
+
+function subtitlesToggle(type){
+
+const auto =
+document.getElementById("autoSub");
+
+const anim =
+document.getElementById("animSub");
+
+if(type==="auto"){
+
+anim.disabled = auto.checked;
+
+if(!auto.checked){
+anim.disabled = false;
+}
+
+}
+
+if(type==="anim"){
+
+auto.disabled = anim.checked;
+
+if(!anim.checked){
+auto.disabled = false;
+}
+
+}
+
+update();
+
+}
+
+/* CALCUL */
+
 function update(){
 
 let active =
 document.querySelector(".card.active");
 
+if(!active){
+
+document.getElementById("total").innerText = "—";
+return;
+
+}
+
 let total = 0;
 
-let select =
-active.querySelector("select");
+/* REELS */
 
-if(select){
+if(active.id==="reels"){
 
-total =
-parseInt(select.value);
+let reelPrice =
+parseInt(
+document.getElementById("reelCount").value
+);
+
+total = reelPrice;
+
+/* nombre de reels */
+
+let reelCount = 1;
+
+if(reelPrice===300) reelCount=2;
+if(reelPrice===400) reelCount=3;
+if(reelPrice===500) reelCount=4;
+if(reelPrice===600) reelCount=5;
+
+/* sous-titres */
+
+const auto =
+document.getElementById("autoSub");
+
+const anim =
+document.getElementById("animSub");
+
+if(auto.checked){
+
+total += (25 * reelCount);
 
 }
 
-if(active.dataset.base){
+if(anim.checked){
 
-total =
-parseInt(active.dataset.base);
+total += (50 * reelCount);
 
 }
+
+}
+
+/* AUTRES PRESTATIONS */
+
+else{
+
+total =
+parseInt(active.dataset.base || 0);
 
 active
-.querySelectorAll("input[type=checkbox]")
+.querySelectorAll('input[type="checkbox"]')
 .forEach(box=>{
 
 if(box.checked){
 
-let value =
-parseInt(box.value);
-
-if(!isNaN(value)){
-total += value;
-}
+total += parseInt(box.value);
 
 }
 
 });
+
+}
 
 document.getElementById("total").innerText =
 total + "€";
 
 }
 
+/* WHATSAPP PRO */
+
 function sendWA(){
 
 let active =
 document.querySelector(".card.active");
 
+if(!active){
+
+alert("Sélectionnez une prestation.");
+return;
+
+}
+
 let prestation =
 active.querySelector("h2").innerText;
 
-let options = [];
+let total =
+document.getElementById("total").innerText;
+
+let options=[];
 
 active
-.querySelectorAll("input[type=checkbox]")
+.querySelectorAll('input[type="checkbox"]')
 .forEach(box=>{
 
 if(box.checked){
@@ -632,56 +738,64 @@ box.parentElement
 .querySelector("label")
 .innerText;
 
-options.push(label);
+options.push("- " + label);
 
 }
 
 });
-
-let total =
-document.getElementById("total")
-.innerText;
 
 let message =
 `Bonjour PASTEL 2503,
 
 Je souhaite obtenir un devis.
 
-PRESTATION :
+Prestation :
 ${prestation}
 
-OPTIONS :
-${options.length ? options.join("\n") : "Aucune option sélectionnée"}
+Options sélectionnées :
+${options.length ? options.join('\n') : 'Aucune'}
 
-MONTANT ESTIMATIF :
+Montant estimatif :
 ${total}
 
 Merci.`;
 
 window.open(
-"https://wa.me/33759379324?text=" +
+"https://wa.me/33759379324?text="
++
 encodeURIComponent(message)
 );
 
 }
 
+/* PDF PRO */
+
 function generatePDF(){
-
-const { jsPDF } = window.jspdf;
-
-const doc =
-new jsPDF();
 
 let active =
 document.querySelector(".card.active");
 
+if(!active){
+
+alert("Sélectionnez une prestation.");
+return;
+
+}
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
 let prestation =
 active.querySelector("h2").innerText;
 
-let options = [];
+let total =
+document.getElementById("total").innerText;
+
+let options=[];
 
 active
-.querySelectorAll("input[type=checkbox]")
+.querySelectorAll('input[type="checkbox"]')
 .forEach(box=>{
 
 if(box.checked){
@@ -696,107 +810,72 @@ box.parentElement
 
 });
 
-let total =
-document.getElementById("total")
-.innerText;
-
-let date =
-new Date().toLocaleDateString("fr-FR");
-
 doc.setFontSize(22);
 doc.text("PASTEL 2503",20,20);
 
 doc.setFontSize(12);
+doc.text("Production Audiovisuelle - Paris",20,30);
 
-doc.text(
-"Production Audiovisuelle - Paris",
-20,
-30
-);
-
-doc.text(
-"Date : " + date,
-20,
-40
-);
+doc.line(20,35,190,35);
 
 doc.setFontSize(16);
-
-doc.text(
-"DEVIS ESTIMATIF",
-20,
-60
-);
+doc.text("DEVIS ESTIMATIF",20,50);
 
 doc.setFontSize(12);
 
 doc.text(
-"Prestation choisie :",
+"Prestation : " + prestation,
 20,
-80
+65
 );
 
-doc.text(
-prestation,
-20,
-90
-);
+let y = 80;
 
-doc.text(
-"Options selectionnees :",
-20,
-110
-);
+doc.text("Options :",20,y);
 
-let y = 120;
+y += 10;
 
 if(options.length){
 
 options.forEach(option=>{
 
-doc.text(
-"- " + option,
-25,
-y
-);
-
-y += 10;
+doc.text("- " + option,25,y);
+y += 8;
 
 });
 
 }else{
 
-doc.text(
-"Aucune option",
-25,
-120
-);
-
-y += 10;
+doc.text("Aucune option",25,y);
+y += 8;
 
 }
 
-doc.setFontSize(18);
+y += 10;
+
+doc.setFontSize(16);
 
 doc.text(
-"TOTAL ESTIME : " + total,
+"Montant estimatif : " + total,
 20,
-y + 20
+y
 );
+
+y += 20;
 
 doc.setFontSize(10);
 
 doc.text(
 "Document genere automatiquement depuis pastel2503.fr",
 20,
-280
+y
 );
 
-doc.save(
-"devis_pastel2503.pdf"
-);
+doc.save("devis-pastel2503.pdf");
 
 }
+
+/* INITIALISATION */
 
 update();
 
