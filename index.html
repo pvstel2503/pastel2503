@@ -79,18 +79,24 @@ padding:20px;
 /* CARD */
 .card{
 display:none;
+opacity:0;
+transform:translateY(20px);
+transition:0.4s ease;
 background:rgba(255,255,255,0.06);
 border:1px solid rgba(255,255,255,0.08);
 border-radius:18px;
 padding:22px;
 margin-bottom:20px;
+backdrop-filter: blur(14px);
 }
 
 .card.active{
 display:block;
+opacity:1;
+transform:translateY(0);
 }
 
-/* TITRES */
+/* TITLES */
 h2{
 color:#F7B7C3;
 margin-bottom:10px;
@@ -201,8 +207,15 @@ cursor:pointer;
 font-weight:bold;
 }
 
-.wa{background:#25D366;color:white;}
-.pdf{background:#F7B7C3;color:black;}
+.wa{
+background:#25D366;
+color:white;
+}
+
+.pdf{
+background:#F7B7C3;
+color:black;
+}
 </style>
 </head>
 
@@ -233,9 +246,10 @@ font-weight:bold;
 ✔ Vidéo verticale 60 sec max<br>
 ✔ Montage + étalonnage<br>
 ✔ Export réseaux sociaux<br>
+✔ 1 série de modifications
 </p>
 
-<select id="reelsSelect" onchange="update()">
+<select onchange="update()">
 <option value="200">1 Reel — 200€</option>
 <option value="300">2 Reels (même session) — 300€</option>
 <option value="400">3 Reels — 400€</option>
@@ -250,7 +264,8 @@ font-weight:bold;
 </div>
 
 <!-- STREET -->
-<div id="street" class="card">
+<div id="street" class="card" data-base="500">
+
 <h2>Street Clip — 500€</h2>
 
 <p>
@@ -271,7 +286,8 @@ font-weight:bold;
 </div>
 
 <!-- PREMIUM -->
-<div id="premium" class="card">
+<div id="premium" class="card" data-base="800">
+
 <h2>Clip Premium — 800€</h2>
 
 <p>
@@ -295,6 +311,7 @@ font-weight:bold;
 
 <!-- PORTFOLIO -->
 <div id="portfolio" class="card">
+
 <h2>Portfolio</h2>
 
 <div class="portfolio">
@@ -308,6 +325,7 @@ font-weight:bold;
 </div>
 
 </div>
+
 </div>
 
 </div>
@@ -333,27 +351,26 @@ document.getElementById(id).classList.add("active");
 update();
 }
 
-function update(){
+function getBase(active){
 
-let active=document.querySelector(".card.active");
-let total=0;
-
-// reels base
-let select=document.getElementById("reelsSelect");
-if(select && active.id==="reels"){
-total=parseInt(select.value);
+if(active.id === "reels"){
+let select = active.querySelector("select");
+return parseInt(select.value);
 }
 
-// street / premium base
-if(active.id==="street") total=500;
-if(active.id==="premium") total=800;
+return parseInt(active.dataset.base || 0);
+}
 
-// options
+function update(){
+
+let active = document.querySelector(".card.active");
+let total = getBase(active);
+
 active.querySelectorAll("input[type=checkbox]").forEach(c=>{
-if(c.checked) total+=parseInt(c.value);
+if(c.checked) total += parseInt(c.value);
 });
 
-document.getElementById("total").innerText=total+"€";
+document.getElementById("total").innerText = total + "€";
 }
 
 function sendWA(){
