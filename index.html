@@ -19,10 +19,15 @@ box-sizing:border-box;
 font-family:Arial,sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
-background:linear-gradient(180deg,#1a1220,#0d0d0d);
+background:linear-gradient(180deg,#201328,#0d0d0d);
 color:white;
 padding-bottom:220px;
+overflow-x:hidden;
 }
 
 .hero{
@@ -31,13 +36,13 @@ padding:60px 20px 25px;
 }
 
 .logo{
-width:180px;
+width:190px;
 margin-bottom:12px;
-filter:drop-shadow(0 10px 25px rgba(247,183,195,.25));
+filter:drop-shadow(0 12px 30px rgba(247,183,195,.25));
 }
 
 h1{
-font-size:2.5rem;
+font-size:2.6rem;
 letter-spacing:2px;
 }
 
@@ -55,7 +60,7 @@ margin-top:25px;
 }
 
 .nav button{
-background:rgba(255,255,255,.07);
+background:rgba(255,255,255,.08);
 border:1px solid rgba(255,255,255,.12);
 color:white;
 padding:10px 14px;
@@ -72,7 +77,7 @@ transform:translateY(-2px);
 }
 
 .container{
-max-width:1000px;
+max-width:1050px;
 margin:auto;
 padding:20px;
 }
@@ -116,6 +121,13 @@ margin-top:8px;
 border-radius:12px;
 background:rgba(0,0,0,.25);
 border:1px solid rgba(255,255,255,.06);
+transition:.25s;
+}
+
+.option.active-option{
+border:1px solid #F7B7C3;
+box-shadow:0 0 20px rgba(247,183,195,.15);
+transform:scale(1.01);
 }
 
 .option label{
@@ -145,6 +157,41 @@ border:1px solid rgba(255,255,255,.1);
 margin-top:10px;
 }
 
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:15px;
+}
+
+.form-grid input{
+padding:12px;
+border-radius:12px;
+border:none;
+background:rgba(255,255,255,.08);
+color:white;
+}
+
+.info-card{
+padding:18px;
+border-radius:16px;
+background:rgba(247,183,195,.08);
+border:1px solid rgba(247,183,195,.15);
+margin-top:15px;
+}
+
+.info-card ul{
+padding-left:18px;
+line-height:1.8;
+}
+
+.review{
+padding:15px;
+margin-top:10px;
+border-radius:14px;
+background:rgba(255,255,255,.05);
+}
+
 .portfolio{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -155,7 +202,7 @@ gap:22px;
 position:relative;
 border-radius:16px;
 overflow:hidden;
-transition:.3s;
+transition:.35s;
 }
 
 .portfolio-item:hover{
@@ -167,7 +214,6 @@ box-shadow:0 15px 40px rgba(0,0,0,.5);
 height:220px;
 border-radius:16px;
 overflow:hidden;
-border:1px solid rgba(255,255,255,.08);
 }
 
 .video iframe{
@@ -178,22 +224,30 @@ border:none;
 
 .badge{
 position:absolute;
-top:10px;
-left:10px;
-background:rgba(0,0,0,.55);
-padding:6px 10px;
-border-radius:20px;
+top:12px;
+left:12px;
+background:rgba(0,0,0,.7);
+padding:7px 12px;
+border-radius:30px;
 font-size:11px;
+font-weight:bold;
+letter-spacing:1px;
 color:#F7B7C3;
-border:1px solid rgba(247,183,195,.25);
 }
 
 .portfolio-label{
 font-size:11px;
-color:#9f9f9f;
-margin-top:10px;
+color:#aaa;
 padding-left:8px;
+margin-top:10px;
 line-height:1.4;
+}
+
+.delay{
+margin-top:10px;
+font-size:14px;
+color:#F7B7C3;
+font-weight:bold;
 }
 
 .total{
@@ -247,6 +301,10 @@ color:black;
 grid-template-columns:1fr;
 }
 
+.form-grid{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -290,13 +348,16 @@ Production Audiovisuelle • Paris
 
 <p>
 ✔ Échange et préparation<br>
-✔ Jusqu’à 1h30 de tournage<br>
+✔ Jusqu'à 1h30 de tournage<br>
 ✔ 1 vidéo verticale (60 secondes max)<br>
 ✔ Montage professionnel<br>
-✔ Étalonnage<br>
 ✔ Export optimisé TikTok / Instagram<br>
 ✔ 1 série de modifications
 </p>
+
+<div class="delay">
+⏱ Livraison estimée : 5 à 7 jours
+</div>
 
 <select id="reelCount" onchange="update()">
 <option value="200">1 Reel — 200€</option>
@@ -304,24 +365,17 @@ Production Audiovisuelle • Paris
 <option value="400">3 Reels (si même session) — 400€</option>
 <option value="500">4 Reels (si même session) — 500€</option>
 <option value="600">5 Reels (si même session) — 600€</option>
+<option value="700">6 Reels (si même session) — 700€</option>
 </select>
 
 <div class="option">
 <label>Sous-titres automatiques +25€/reel</label>
-<input
-type="checkbox"
-id="autoSub"
-value="25"
-onchange="subtitlesToggle('auto')">
+<input type="checkbox" id="autoSub" onchange="subtitlesToggle('auto')">
 </div>
 
 <div class="option">
 <label>Sous-titres animés +50€/reel</label>
-<input
-type="checkbox"
-id="animSub"
-value="50"
-onchange="subtitlesToggle('anim')">
+<input type="checkbox" id="animSub" onchange="subtitlesToggle('anim')">
 </div>
 
 </div>
@@ -333,28 +387,31 @@ onchange="subtitlesToggle('anim')">
 
 <p>
 ✔ Préparation du tournage<br>
-✔ Jusqu’à 6h de tournage<br>
+✔ Jusqu'à 6h de tournage<br>
 ✔ Plusieurs spots dans Paris<br>
 ✔ Sony FX3 cinéma<br>
 ✔ Montage complet<br>
-✔ Étalonnage<br>
+✔ 1 Reel vertical inclus<br>
 ✔ Livraison du clip sous 15 jours<br>
-✔ 1 reel vertical extrait inclus<br>
 ✔ 2 séries de modifications
 </p>
 
+<div class="delay">
+⏱ Livraison estimée : 15 jours
+</div>
+
 <div class="option">
 <label>2 reels supplémentaires +80€</label>
-<input type="checkbox" value="80" onchange="update()">
+<input type="checkbox" id="street2" value="80" onchange="streetReels()">
 </div>
 
 <div class="option">
 <label>4 reels supplémentaires +140€</label>
-<input type="checkbox" value="140" onchange="update()">
+<input type="checkbox" id="street4" value="140" onchange="streetReels()">
 </div>
 
 <div class="option">
-<label>Sous-titres automatiques du clip +50€</label>
+<label>Sous-titres automatiques +50€</label>
 <input type="checkbox" value="50" onchange="update()">
 </div>
 
@@ -364,7 +421,7 @@ onchange="subtitlesToggle('anim')">
 </div>
 
 <div class="option">
-<label>Drone +150€</label>
+<label>Drone (prestataire externe) +150€</label>
 <input type="checkbox" value="150" onchange="update()">
 </div>
 
@@ -389,18 +446,18 @@ onchange="subtitlesToggle('anim')">
 </div>
 
 <div class="option">
-<label>FX avancés (sur devis)</label>
+<label>FX avancés (tracking, compositing, VFX) à partir de +100€</label>
 <input type="checkbox" disabled>
 </div>
 
 <div class="option">
-<label>Déplacement hors Paris (sur devis)</label>
+<label>Déplacement hors Paris : sur devis</label>
 <input type="checkbox" disabled>
 </div>
 
 </div>
 
-<!-- CLIP PREMIUM -->
+<!-- PREMIUM -->
 <div id="premium" class="card" data-base="800">
 
 <h2>Clip Premium — 800€</h2>
@@ -409,30 +466,34 @@ onchange="subtitlesToggle('anim')">
 ✔ Échange préparatoire<br>
 ✔ Storyboard simple<br>
 ✔ Préparation du tournage<br>
-✔ Jusqu’à 8h de tournage<br>
+✔ Jusqu'à 8h de tournage<br>
 ✔ Plusieurs décors possibles<br>
 ✔ Multi-lieux Paris<br>
 ✔ Sony FX3 cinéma<br>
-✔ Montage complet<br>
-✔ Étalonnage avancé<br>
+✔ Direction artistique<br>
+✔ Montage premium<br>
 ✔ Livraison 4K<br>
 ✔ Livraison sous 15 jours<br>
-✔ 1 reel vertical extrait inclus<br>
+✔ 1 Reel vertical inclus<br>
 ✔ 2 séries de modifications
 </p>
 
+<div class="delay">
+⏱ Livraison estimée : 15 jours
+</div>
+
 <div class="option">
 <label>2 reels promotionnels +80€</label>
-<input type="checkbox" value="80" onchange="update()">
+<input type="checkbox" id="premium2" value="80" onchange="premiumReels()">
 </div>
 
 <div class="option">
 <label>4 reels promotionnels +140€</label>
-<input type="checkbox" value="140" onchange="update()">
+<input type="checkbox" id="premium4" value="140" onchange="premiumReels()">
 </div>
 
 <div class="option">
-<label>Sous-titres automatiques du clip +50€</label>
+<label>Sous-titres automatiques +50€</label>
 <input type="checkbox" value="50" onchange="update()">
 </div>
 
@@ -442,7 +503,7 @@ onchange="subtitlesToggle('anim')">
 </div>
 
 <div class="option">
-<label>Drone +150€</label>
+<label>Drone (prestataire externe) +150€</label>
 <input type="checkbox" value="150" onchange="update()">
 </div>
 
@@ -467,12 +528,12 @@ onchange="subtitlesToggle('anim')">
 </div>
 
 <div class="option">
-<label>FX avancés (sur devis)</label>
+<label>FX avancés (tracking, compositing, VFX) à partir de +100€</label>
 <input type="checkbox" disabled>
 </div>
 
 <div class="option">
-<label>Déplacement hors Paris (sur devis)</label>
+<label>Déplacement hors Paris : sur devis</label>
 <input type="checkbox" disabled>
 </div>
 
@@ -484,25 +545,88 @@ onchange="subtitlesToggle('anim')">
 <h2>Captation — 200€</h2>
 
 <p>
-✔ Jusqu’à 4h de présence<br>
+✔ Jusqu'à 4h de présence<br>
 ✔ Sony FX3<br>
 ✔ Captation brute<br>
 ✔ Livraison des rushes sous 72h
 </p>
 
-<div class="option">
-<label>Aftermovie 1 minute +150€</label>
-<input type="checkbox" value="150" onchange="update()">
+<div class="delay">
+⏱ Livraison estimée : 72h
 </div>
 
 <div class="option">
-<label>Aftermovie 2 minutes +250€</label>
-<input type="checkbox" value="250" onchange="update()">
+<label>Montage aftermovie (1 minute) +150€</label>
+<input type="checkbox" id="after1" value="150" onchange="captationMontage()">
+</div>
+
+<div class="option">
+<label>Montage aftermovie (2 minutes) +250€</label>
+<input type="checkbox" id="after2" value="250" onchange="captationMontage()">
+</div>
+
+<div class="option">
+<label>Étalonnage des rushes +50€</label>
+<input type="checkbox" value="50" onchange="update()">
 </div>
 
 <div class="option">
 <label>Livraison des rushes sous 24h +50€</label>
 <input type="checkbox" value="50" onchange="update()">
+</div>
+
+</div>
+
+<!-- FORMULAIRE CLIENT -->
+<div class="card active" id="client">
+
+<h2>Informations client</h2>
+
+<div class="form-grid">
+
+<input type="text" id="clientName" placeholder="Nom / Artiste">
+
+<input type="text" id="clientBrand" placeholder="Marque / Entreprise">
+
+<input type="text" id="clientPhone" placeholder="Téléphone">
+
+<input type="text" id="clientInstagram" placeholder="Instagram">
+
+<input type="email" id="clientEmail" placeholder="Email">
+
+</div>
+
+</div>
+
+<!-- POURQUOI NOUS -->
+<div class="info-card">
+
+<h2>Pourquoi travailler avec PASTEL 2503 ?</h2>
+
+<ul>
+<li>Sony FX3 cinéma</li>
+<li>Direction artistique adaptée à votre univers</li>
+<li>Formats optimisés réseaux sociaux</li>
+<li>Livraison rapide</li>
+<li>Basé à Paris</li>
+<li>Accompagnement du projet de A à Z</li>
+</ul>
+
+</div>
+
+<!-- AVIS -->
+<div class="info-card">
+
+<h2>Avis clients</h2>
+
+<div class="review">
+⭐⭐⭐⭐⭐<br>
+« Le clip est lourd, exactement l'ambiance qu'on voulait. »
+</div>
+
+<div class="review">
+⭐⭐⭐⭐⭐<br>
+« Rapide, carré, rien à redire. On reviendra. »
 </div>
 
 </div>
@@ -516,7 +640,7 @@ onchange="subtitlesToggle('anim')">
 
 <div class="portfolio-item">
 
-<div class="badge">● Street Clip</div>
+<div class="badge">STREET CLIP</div>
 
 <div class="video">
 <iframe src="https://www.youtube.com/embed/zmgPOjEVgNY"></iframe>
@@ -530,7 +654,7 @@ Clip inclus dans l'offre Street Clip — Valeur 500€
 
 <div class="portfolio-item">
 
-<div class="badge">● Clip Premium</div>
+<div class="badge">OFFRE PREMIUM</div>
 
 <div class="video">
 <iframe src="https://www.youtube.com/embed/ZluWYUDNavM"></iframe>
@@ -557,6 +681,10 @@ Clip inclus dans l'offre Clip Premium — Valeur 800€
 —
 </div>
 
+<div id="devisNumber" style="margin-top:5px;color:#aaa;font-size:12px;">
+DEV-2503-0000
+</div>
+
 <div class="btns">
 
 <button class="btn wa" onclick="sendWA()">
@@ -564,7 +692,7 @@ WhatsApp
 </button>
 
 <button class="btn pdf" onclick="generatePDF()">
-Télécharger le devis PDF
+PDF
 </button>
 
 </div>
@@ -573,11 +701,24 @@ Télécharger le devis PDF
 
 <script>
 
+let currentTotal = 0;
+
+const devisNumber =
+"DEV-2503-" +
+Math.floor(1000 + Math.random()*9000);
+
+document.getElementById("devisNumber").innerText =
+devisNumber;
+
+/* =========================
+NAVIGATION
+========================= */
+
 function show(id){
 
 document
 .querySelectorAll(".card")
-.forEach(card=>card.classList.remove("active"));
+.forEach(c=>c.classList.remove("active"));
 
 document
 .getElementById(id)
@@ -587,7 +728,30 @@ update();
 
 }
 
-/* SOUS-TITRES EXCLUSIFS */
+/* =========================
+ANIMATION OPTIONS
+========================= */
+
+document.addEventListener("change",e=>{
+
+if(e.target.type==="checkbox"){
+
+const option =
+e.target.closest(".option");
+
+if(e.target.checked){
+option.classList.add("active-option");
+}else{
+option.classList.remove("active-option");
+}
+
+}
+
+});
+
+/* =========================
+SOUS TITRES REELS
+========================= */
 
 function subtitlesToggle(type){
 
@@ -599,21 +763,15 @@ document.getElementById("animSub");
 
 if(type==="auto"){
 
+anim.checked = false;
 anim.disabled = auto.checked;
-
-if(!auto.checked){
-anim.disabled = false;
-}
 
 }
 
 if(type==="anim"){
 
+auto.checked = false;
 auto.disabled = anim.checked;
-
-if(!anim.checked){
-auto.disabled = false;
-}
 
 }
 
@@ -621,7 +779,160 @@ update();
 
 }
 
-/* CALCUL */
+/* =========================
+STREET REELS EXCLUSIFS
+========================= */
+
+function streetReels(){
+
+const r2 =
+document.getElementById("street2");
+
+const r4 =
+document.getElementById("street4");
+
+if(r2.checked){
+
+r4.checked=false;
+r4.disabled=true;
+
+}else{
+
+r4.disabled=false;
+
+}
+
+if(r4.checked){
+
+r2.checked=false;
+r2.disabled=true;
+
+}else{
+
+r2.disabled=false;
+
+}
+
+update();
+
+}
+
+/* =========================
+PREMIUM REELS EXCLUSIFS
+========================= */
+
+function premiumReels(){
+
+const r2 =
+document.getElementById("premium2");
+
+const r4 =
+document.getElementById("premium4");
+
+if(r2.checked){
+
+r4.checked=false;
+r4.disabled=true;
+
+}else{
+
+r4.disabled=false;
+
+}
+
+if(r4.checked){
+
+r2.checked=false;
+r2.disabled=true;
+
+}else{
+
+r2.disabled=false;
+
+}
+
+update();
+
+}
+
+/* =========================
+CAPTATION MONTAGE EXCLUSIF
+========================= */
+
+function captationMontage(){
+
+const m1 =
+document.getElementById("after1");
+
+const m2 =
+document.getElementById("after2");
+
+if(m1.checked){
+
+m2.checked=false;
+m2.disabled=true;
+
+}else{
+
+m2.disabled=false;
+
+}
+
+if(m2.checked){
+
+m1.checked=false;
+m1.disabled=true;
+
+}else{
+
+m1.disabled=false;
+
+}
+
+update();
+
+}
+
+/* =========================
+ANIMATION PRIX
+========================= */
+
+function animatePrice(newPrice){
+
+let start = currentTotal;
+
+let increment =
+(newPrice - start) / 20;
+
+let count = 0;
+
+let interval = setInterval(()=>{
+
+count++;
+
+start += increment;
+
+document.getElementById("total").innerText =
+Math.round(start) + "€";
+
+if(count >= 20){
+
+clearInterval(interval);
+
+document.getElementById("total").innerText =
+newPrice + "€";
+
+currentTotal = newPrice;
+
+}
+
+},15);
+
+}
+
+/* =========================
+CALCUL TOTAL
+========================= */
 
 function update(){
 
@@ -641,45 +952,35 @@ let total = 0;
 
 if(active.id==="reels"){
 
-let reelPrice =
-parseInt(
-document.getElementById("reelCount").value
-);
+const reelCount =
+document.getElementById("reelCount");
 
-total = reelPrice;
+total =
+parseInt(reelCount.value);
 
-/* nombre de reels */
+let qty = 1;
 
-let reelCount = 1;
+if(reelCount.selectedIndex===1) qty=2;
+if(reelCount.selectedIndex===2) qty=3;
+if(reelCount.selectedIndex===3) qty=4;
+if(reelCount.selectedIndex===4) qty=5;
+if(reelCount.selectedIndex===5) qty=6;
 
-if(reelPrice===300) reelCount=2;
-if(reelPrice===400) reelCount=3;
-if(reelPrice===500) reelCount=4;
-if(reelPrice===600) reelCount=5;
+if(document.getElementById("autoSub").checked){
 
-/* sous-titres */
-
-const auto =
-document.getElementById("autoSub");
-
-const anim =
-document.getElementById("animSub");
-
-if(auto.checked){
-
-total += (25 * reelCount);
+total += 25 * qty;
 
 }
 
-if(anim.checked){
+if(document.getElementById("animSub").checked){
 
-total += (50 * reelCount);
+total += 50 * qty;
 
 }
 
 }
 
-/* AUTRES PRESTATIONS */
+/* AUTRES OFFRES */
 
 else{
 
@@ -687,12 +988,13 @@ total =
 parseInt(active.dataset.base || 0);
 
 active
-.querySelectorAll('input[type="checkbox"]')
+.querySelectorAll("input[type=checkbox]")
 .forEach(box=>{
 
 if(box.checked){
 
-total += parseInt(box.value);
+total +=
+parseInt(box.value || 0);
 
 }
 
@@ -700,184 +1002,176 @@ total += parseInt(box.value);
 
 }
 
-document.getElementById("total").innerText =
-total + "€";
+animatePrice(total);
 
 }
 
-/* WHATSAPP PRO */
+/* =========================
+WHATSAPP PRO
+========================= */
 
 function sendWA(){
 
 let active =
 document.querySelector(".card.active");
 
-if(!active){
+let service =
+active.querySelector("h2")
+? active.querySelector("h2").innerText
+: "Projet";
 
-alert("Sélectionnez une prestation.");
-return;
+let nom =
+document.getElementById("clientName").value || "-";
 
-}
+let marque =
+document.getElementById("clientBrand").value || "-";
 
-let prestation =
-active.querySelector("h2").innerText;
+let tel =
+document.getElementById("clientPhone").value || "-";
 
-let total =
-document.getElementById("total").innerText;
+let insta =
+document.getElementById("clientInstagram").value || "-";
 
-let options=[];
-
-active
-.querySelectorAll('input[type="checkbox"]')
-.forEach(box=>{
-
-if(box.checked){
-
-let label =
-box.parentElement
-.querySelector("label")
-.innerText;
-
-options.push("- " + label);
-
-}
-
-});
+let email =
+document.getElementById("clientEmail").value || "-";
 
 let message =
-`Bonjour PASTEL 2503,
+`Bonjour PASTEL 2503
 
 Je souhaite obtenir un devis.
 
-Prestation :
-${prestation}
+Devis : ${devisNumber}
 
-Options sélectionnées :
-${options.length ? options.join('\n') : 'Aucune'}
+Projet :
+${service}
+
+Nom / Artiste :
+${nom}
+
+Marque :
+${marque}
+
+Téléphone :
+${tel}
+
+Instagram :
+${insta}
+
+Email :
+${email}
 
 Montant estimatif :
-${total}
+${currentTotal}€
 
 Merci.`;
 
 window.open(
-"https://wa.me/33759379324?text="
-+
+"https://wa.me/33759379324?text=" +
 encodeURIComponent(message)
 );
 
 }
 
-/* PDF PRO */
+/* =========================
+PDF PREMIUM
+========================= */
 
 function generatePDF(){
-
-let active =
-document.querySelector(".card.active");
-
-if(!active){
-
-alert("Sélectionnez une prestation.");
-return;
-
-}
 
 const { jsPDF } = window.jspdf;
 
 const doc = new jsPDF();
 
-let prestation =
-active.querySelector("h2").innerText;
+let active =
+document.querySelector(".card.active");
 
-let total =
-document.getElementById("total").innerText;
+let service =
+active.querySelector("h2")
+? active.querySelector("h2").innerText
+: "Projet";
 
-let options=[];
+let nom =
+document.getElementById("clientName").value || "-";
 
-active
-.querySelectorAll('input[type="checkbox"]')
-.forEach(box=>{
+let marque =
+document.getElementById("clientBrand").value || "-";
 
-if(box.checked){
+let tel =
+document.getElementById("clientPhone").value || "-";
 
-options.push(
-box.parentElement
-.querySelector("label")
-.innerText
-);
+let insta =
+document.getElementById("clientInstagram").value || "-";
 
-}
-
-});
+let email =
+document.getElementById("clientEmail").value || "-";
 
 doc.setFontSize(22);
 doc.text("PASTEL 2503",20,20);
 
-doc.setFontSize(12);
-doc.text("Production Audiovisuelle - Paris",20,30);
+doc.setFontSize(11);
+doc.text("Production Audiovisuelle - Paris",20,28);
 
 doc.line(20,35,190,35);
 
-doc.setFontSize(16);
-doc.text("DEVIS ESTIMATIF",20,50);
+doc.setFontSize(14);
+doc.text("DEVIS",20,50);
 
-doc.setFontSize(12);
-
-doc.text(
-"Prestation : " + prestation,
-20,
-65
-);
-
-let y = 80;
-
-doc.text("Options :",20,y);
-
-y += 10;
-
-if(options.length){
-
-options.forEach(option=>{
-
-doc.text("- " + option,25,y);
-y += 8;
-
-});
-
-}else{
-
-doc.text("Aucune option",25,y);
-y += 8;
-
-}
-
-y += 10;
-
-doc.setFontSize(16);
+doc.setFontSize(11);
+doc.text(devisNumber,20,58);
 
 doc.text(
-"Montant estimatif : " + total,
+"Date : " +
+new Date().toLocaleDateString("fr-FR"),
 20,
-y
+66
 );
 
-y += 20;
+doc.line(20,72,190,72);
+
+doc.text("Nom / Artiste : " + nom,20,86);
+doc.text("Marque : " + marque,20,94);
+doc.text("Telephone : " + tel,20,102);
+doc.text("Instagram : " + insta,20,110);
+doc.text("Email : " + email,20,118);
+
+doc.line(20,126,190,126);
+
+doc.setFontSize(13);
+doc.text("Projet",20,140);
+
+doc.setFontSize(11);
+doc.text(service,20,150);
+
+doc.line(20,158,190,158);
+
+doc.setFontSize(13);
+doc.text("Montant estimatif",20,172);
+
+doc.setFontSize(24);
+doc.text(currentTotal + " €",20,188);
 
 doc.setFontSize(10);
-
 doc.text(
-"Document genere automatiquement depuis pastel2503.fr",
+"Document genere automatiquement par PASTEL 2503",
 20,
-y
+270
 );
 
-doc.save("devis-pastel2503.pdf");
+doc.save(
+devisNumber + ".pdf"
+);
 
 }
 
-/* INITIALISATION */
+/* =========================
+INIT
+========================= */
 
-update();
+document
+.querySelectorAll(".card")
+.forEach(c=>c.classList.remove("active"));
+
+document.getElementById("total").innerText = "—";
 
 </script>
 
