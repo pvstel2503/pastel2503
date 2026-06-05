@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PASTEL 2503</title>
 
-<!-- PDF LIB -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -29,14 +28,20 @@ padding:60px 20px 25px;
 }
 
 .logo{
-width:120px;
-border-radius:16px;
-margin-bottom:12px;
-box-shadow:0 15px 40px rgba(247,183,195,0.2);
+width:170px;
+margin-bottom:10px;
+filter: drop-shadow(0 10px 25px rgba(247,183,195,0.25));
 }
 
-h1{font-size:2.5rem;}
-.subtitle{color:#ddd;margin-top:8px;}
+h1{
+font-size:2.5rem;
+letter-spacing:2px;
+}
+
+.subtitle{
+color:#cfcfcf;
+margin-top:8px;
+}
 
 /* NAV */
 .nav{
@@ -98,7 +103,11 @@ color:#F7B7C3;
 margin-bottom:10px;
 }
 
-p{color:#d6d6d6;margin-bottom:10px;}
+p{
+color:#d6d6d6;
+margin-bottom:12px;
+line-height:1.4;
+}
 
 /* OPTIONS */
 .option{
@@ -110,28 +119,27 @@ margin-top:8px;
 border-radius:12px;
 background:rgba(0,0,0,0.25);
 border:1px solid rgba(255,255,255,0.06);
-transition:0.2s;
 }
 
-.option:hover{
-border-color:#F7B7C3;
-transform:translateX(3px);
+.option label{
+flex:1;
 }
 
 input[type=checkbox]{
-transform:scale(1.25);
+width:18px;
+height:18px;
 accent-color:#F7B7C3;
 }
 
-/* INPUTS */
-input{
+/* SELECT */
+select{
 width:100%;
 padding:12px;
-margin-top:8px;
 border-radius:12px;
-border:1px solid rgba(255,255,255,0.1);
 background:rgba(0,0,0,0.3);
 color:white;
+border:1px solid rgba(255,255,255,0.1);
+margin-top:10px;
 }
 
 /* PACK */
@@ -149,18 +157,13 @@ color:#ddd;
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:12px;
-margin-top:10px;
 }
 
 .video{
-background:rgba(255,255,255,0.05);
-border-radius:14px;
 height:180px;
-display:flex;
-align-items:center;
-justify-content:center;
+border-radius:14px;
 overflow:hidden;
-border:1px solid rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.08);
 }
 
 .video iframe{
@@ -191,21 +194,21 @@ margin-top:5px;
 
 .btns{
 display:flex;
-gap:10px;
 justify-content:center;
-flex-wrap:wrap;
+gap:10px;
 margin-top:10px;
+flex-wrap:wrap;
 }
 
 .btn{
-padding:12px;
-border-radius:12px;
+padding:12px 16px;
 border:none;
+border-radius:12px;
 cursor:pointer;
 font-weight:bold;
 }
 
-.whatsapp{
+.wa{
 background:#25D366;
 color:white;
 }
@@ -227,60 +230,101 @@ color:black;
 
 <div class="nav">
 <button onclick="show('reels')">Reels</button>
-<button onclick="show('street')">Street</button>
-<button onclick="show('premium')">Premium</button>
+<button onclick="show('street')">Street Clip</button>
+<button onclick="show('premium')">Clip Premium</button>
 <button onclick="show('portfolio')">Portfolio</button>
-<button onclick="show('form')">Devis</button>
 </div>
 </div>
 
 <div class="container">
 
 <!-- REELS -->
-<div id="reels" class="card active">
-<h2>Reels</h2>
+<div id="reels" class="card active" data-base="200">
+
+<h2>Reels — Contenu court</h2>
+
+<p>
+✔ Jusqu’à 1h30 de tournage<br>
+✔ Vidéo verticale 60 secondes max<br>
+✔ Cadrage réseaux sociaux optimisé<br>
+✔ Montage + étalonnage<br>
+✔ Export TikTok / Instagram<br>
+✔ 1 série de modifications
+</p>
 
 <select onchange="update()">
 <option value="200">1 Reel — 200€</option>
-<option value="300">2 Reels — 300€</option>
-<option value="400">3 Reels — 400€</option>
-<option value="500">4 Reels — 500€</option>
-<option value="600">5 Reels — 600€</option>
+<option value="300">2 Reels — même session 300€</option>
+<option value="400">3 Reels — même session 400€</option>
+<option value="500">4 Reels — même session 500€</option>
+<option value="600">5 Reels — même session 600€</option>
 </select>
 
 <div class="option"><label>Sous-titres auto +25€</label><input type="checkbox" value="25" onchange="update()"></div>
 <div class="option"><label>Sous-titres animés +50€</label><input type="checkbox" value="50" onchange="update()"></div>
 
-<div class="pack">🔥 Recommandé : 3 reels + sous-titres animés = meilleur impact viral</div>
+<div class="pack">🔥 Recommandé : 3 reels + sous-titres animés</div>
+
 </div>
 
 <!-- STREET -->
-<div id="street" class="card">
+<div id="street" class="card" data-base="500">
+
 <h2>Street Clip — 500€</h2>
-<p>FX3 • Multi-lieux Paris • style cinématique</p>
+
+<p>
+✔ Pré-production & échange<br>
+✔ Jusqu’à 6h de tournage<br>
+✔ Multi-lieux Paris<br>
+✔ Sony FX3 cinéma<br>
+✔ Montage complet<br>
+✔ Étalonnage<br>
+✔ 1 reel extrait inclus<br>
+✔ 2 séries de modifications
+</p>
 
 <div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
+<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
 <div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
 <div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
 <div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
 
-<div class="pack">🔥 Recommandé : VHS + Drone = rendu cinéma premium</div>
+<div class="pack">🔥 Recommandé : VHS + Drone</div>
+
 </div>
 
 <!-- PREMIUM -->
-<div id="premium" class="card">
-<h2>Clip Premium — 800€</h2>
-<p>Storyboard • 4K cinéma • direction artistique</p>
+<div id="premium" class="card" data-base="800">
 
+<h2>Clip Premium — 800€</h2>
+
+<p>
+✔ Storyboard simple<br>
+✔ Jusqu’à 8h tournage<br>
+✔ Plusieurs décors<br>
+✔ Sony FX3 cinéma<br>
+✔ Direction artistique<br>
+✔ Montage premium<br>
+✔ Étalonnage cinéma<br>
+✔ Livraison 4K<br>
+✔ 2 séries de modifications
+</p>
+
+<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
+<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
+<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
 <div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
 <div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
-<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
+<div class="option"><label>Backstage +100€</label><input type="checkbox" value="100" onchange="update()"></div>
+<div class="option"><label>Tournage nuit +50€</label><input type="checkbox" value="50" onchange="update()"></div>
 
-<div class="pack">🔥 Recommandé : FX + Drone + VHS = clip haut de gamme</div>
+<div class="pack">🔥 Recommandé : FX + Drone + VHS</div>
+
 </div>
 
 <!-- PORTFOLIO -->
 <div id="portfolio" class="card">
+
 <h2>Portfolio</h2>
 
 <div class="portfolio">
@@ -294,16 +338,7 @@ color:black;
 </div>
 
 </div>
-</div>
 
-<!-- FORM -->
-<div id="form" class="card">
-<h2>Votre devis</h2>
-
-<input id="name" placeholder="Nom">
-<input id="contact" placeholder="Email / Insta">
-<input id="date" placeholder="Date">
-<input id="message" placeholder="Message">
 </div>
 
 </div>
@@ -316,7 +351,7 @@ color:black;
 
 <div class="btns">
 
-<button class="btn whatsapp" onclick="sendWA()">WhatsApp</button>
+<button class="btn wa" onclick="sendWA()">WhatsApp</button>
 <button class="btn pdf" onclick="generatePDF()">PDF</button>
 
 </div>
@@ -334,14 +369,14 @@ update();
 function update(){
 
 let active=document.querySelector(".card.active");
-let total=0;
-
-let sel=active.querySelector("select");
-if(sel) total+=parseInt(sel.value);
+let total=parseInt(active.dataset.base || 0);
 
 active.querySelectorAll("input[type=checkbox]").forEach(c=>{
 if(c.checked) total+=parseInt(c.value);
 });
+
+let select=active.querySelector("select");
+if(select) total=parseInt(select.value) + total - (active.dataset.base || 0);
 
 document.getElementById("total").innerText=total+"€";
 }
@@ -349,10 +384,6 @@ document.getElementById("total").innerText=total+"€";
 function sendWA(){
 
 let text=`PASTEL 2503
-Nom: ${name.value}
-Contact: ${contact.value}
-Date: ${date.value}
-Message: ${message.value}
 Total: ${document.getElementById("total").innerText}`;
 
 window.open("https://wa.me/33759379324?text="+encodeURIComponent(text));
@@ -367,13 +398,7 @@ doc.setFontSize(18);
 doc.text("PASTEL 2503 - DEVIS", 20, 20);
 
 doc.setFontSize(12);
-doc.text("Nom: "+name.value, 20, 40);
-doc.text("Contact: "+contact.value, 20, 50);
-doc.text("Date: "+date.value, 20, 60);
-doc.text("Message: "+message.value, 20, 70);
-
-doc.setFontSize(16);
-doc.text("Total: "+document.getElementById("total").innerText, 20, 90);
+doc.text("Total: "+document.getElementById("total").innerText, 20, 40);
 
 doc.save("devis_pastel2503.pdf");
 }
