@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PASTEL 2503</title>
 
+<!-- PDF LIB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
 *{
 margin:0;
@@ -14,53 +17,46 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:linear-gradient(180deg,#141018,#0d0d0d);
+background:linear-gradient(180deg,#1a1220,#0d0d0d);
 color:white;
-padding-bottom:200px;
+padding-bottom:220px;
 }
 
 /* HERO */
 .hero{
 text-align:center;
-padding:60px 20px 30px;
+padding:60px 20px 25px;
 }
 
 .logo{
 width:120px;
 border-radius:16px;
 margin-bottom:12px;
-box-shadow:0 10px 35px rgba(247,183,195,0.15);
+box-shadow:0 15px 40px rgba(247,183,195,0.2);
 }
 
-h1{
-font-size:2.4rem;
-letter-spacing:1px;
-}
-
-.subtitle{
-color:#cfcfcf;
-margin-top:8px;
-}
+h1{font-size:2.5rem;}
+.subtitle{color:#ddd;margin-top:8px;}
 
 /* NAV */
 .nav{
 display:flex;
 justify-content:center;
-gap:10px;
 flex-wrap:wrap;
+gap:10px;
 margin-top:25px;
 }
 
 .nav button{
-background:rgba(255,255,255,0.06);
+background:rgba(255,255,255,0.07);
 border:1px solid rgba(255,255,255,0.12);
 color:white;
 padding:10px 14px;
 border-radius:14px;
 cursor:pointer;
+font-weight:bold;
 transition:0.25s;
 backdrop-filter: blur(10px);
-font-weight:bold;
 }
 
 .nav button:hover{
@@ -71,7 +67,7 @@ transform:translateY(-2px);
 
 /* CONTAINER */
 .container{
-max-width:900px;
+max-width:1000px;
 margin:auto;
 padding:20px;
 }
@@ -82,12 +78,12 @@ display:none;
 opacity:0;
 transform:translateY(20px);
 transition:0.5s ease;
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,0.06);
 border:1px solid rgba(255,255,255,0.08);
 border-radius:18px;
-padding:20px;
+padding:22px;
 margin-bottom:20px;
-backdrop-filter: blur(12px);
+backdrop-filter: blur(14px);
 }
 
 .card.active{
@@ -96,31 +92,20 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* TITRES */
+/* TITLES */
 h2{
-margin-bottom:10px;
 color:#F7B7C3;
-}
-
-p{
-color:#cfcfcf;
 margin-bottom:10px;
 }
 
-/* IMAGES */
-.service-img{
-width:100%;
-border-radius:14px;
-margin-bottom:15px;
-opacity:0.95;
-}
+p{color:#d6d6d6;margin-bottom:10px;}
 
-/* OPTIONS (ALIGNEMENT CLEAN) */
+/* OPTIONS */
 .option{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:12px 12px;
+padding:12px;
 margin-top:8px;
 border-radius:12px;
 background:rgba(0,0,0,0.25);
@@ -129,32 +114,16 @@ transition:0.2s;
 }
 
 .option:hover{
-border-color:rgba(247,183,195,0.4);
+border-color:#F7B7C3;
 transform:translateX(3px);
 }
 
-.option label{
-flex:1;
-}
-
-/* CHECKBOX */
 input[type=checkbox]{
 transform:scale(1.25);
 accent-color:#F7B7C3;
 }
 
-/* SELECT */
-select{
-width:100%;
-padding:12px;
-border-radius:12px;
-background:rgba(0,0,0,0.3);
-color:white;
-border:1px solid rgba(255,255,255,0.1);
-margin-top:10px;
-}
-
-/* FORM */
+/* INPUTS */
 input{
 width:100%;
 padding:12px;
@@ -165,9 +134,39 @@ background:rgba(0,0,0,0.3);
 color:white;
 }
 
-input:focus{
-border-color:#F7B7C3;
-outline:none;
+/* PACK */
+.pack{
+margin-top:15px;
+padding:12px;
+border-left:3px solid #F7B7C3;
+background:rgba(247,183,195,0.08);
+border-radius:10px;
+color:#ddd;
+}
+
+/* PORTFOLIO */
+.portfolio{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-top:10px;
+}
+
+.video{
+background:rgba(255,255,255,0.05);
+border-radius:14px;
+height:180px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.video iframe{
+width:100%;
+height:100%;
+border:none;
 }
 
 /* TOTAL */
@@ -176,7 +175,7 @@ position:fixed;
 bottom:0;
 left:0;
 right:0;
-background:rgba(10,10,10,0.85);
+background:rgba(10,10,10,0.88);
 backdrop-filter: blur(12px);
 border-top:1px solid rgba(255,255,255,0.1);
 padding:18px;
@@ -190,20 +189,30 @@ font-weight:bold;
 margin-top:5px;
 }
 
-.whatsapp{
-display:block;
-margin-top:12px;
-background:#25D366;
-color:white;
-text-decoration:none;
-padding:14px;
-border-radius:14px;
-font-weight:bold;
-transition:0.2s;
+.btns{
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:10px;
 }
 
-.whatsapp:hover{
-transform:scale(1.03);
+.btn{
+padding:12px;
+border-radius:12px;
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+.whatsapp{
+background:#25D366;
+color:white;
+}
+
+.pdf{
+background:#F7B7C3;
+color:black;
 }
 </style>
 </head>
@@ -218,8 +227,9 @@ transform:scale(1.03);
 
 <div class="nav">
 <button onclick="show('reels')">Reels</button>
-<button onclick="show('street')">Street Clip</button>
-<button onclick="show('premium')">Clip Premium</button>
+<button onclick="show('street')">Street</button>
+<button onclick="show('premium')">Premium</button>
+<button onclick="show('portfolio')">Portfolio</button>
 <button onclick="show('form')">Devis</button>
 </div>
 </div>
@@ -228,7 +238,7 @@ transform:scale(1.03);
 
 <!-- REELS -->
 <div id="reels" class="card active">
-<h2>Reels — Contenu court</h2>
+<h2>Reels</h2>
 
 <select onchange="update()">
 <option value="200">1 Reel — 200€</option>
@@ -240,43 +250,59 @@ transform:scale(1.03);
 
 <div class="option"><label>Sous-titres auto +25€</label><input type="checkbox" value="25" onchange="update()"></div>
 <div class="option"><label>Sous-titres animés +50€</label><input type="checkbox" value="50" onchange="update()"></div>
+
+<div class="pack">🔥 Recommandé : 3 reels + sous-titres animés = meilleur impact viral</div>
 </div>
 
 <!-- STREET -->
 <div id="street" class="card">
-<img class="service-img" src="https://i.imgur.com/yourstreet.jpg">
-
 <h2>Street Clip — 500€</h2>
-<p>6h tournage • FX3 • multi-lieux Paris</p>
+<p>FX3 • Multi-lieux Paris • style cinématique</p>
 
 <div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
-<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
 <div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
 <div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
 <div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
+
+<div class="pack">🔥 Recommandé : VHS + Drone = rendu cinéma premium</div>
 </div>
 
 <!-- PREMIUM -->
 <div id="premium" class="card">
-<img class="service-img" src="https://i.imgur.com/yourpremium.jpg">
-
 <h2>Clip Premium — 800€</h2>
-<p>Storyboard • 8h tournage • 4K cinematic</p>
+<p>Storyboard • 4K cinéma • direction artistique</p>
 
-<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
-<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
 <div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
 <div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
-<div class="option"><label>VHS intégration +120€</label><input type="checkbox" value="120" onchange="update()"></div>
+<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
+
+<div class="pack">🔥 Recommandé : FX + Drone + VHS = clip haut de gamme</div>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="portfolio" class="card">
+<h2>Portfolio</h2>
+
+<div class="portfolio">
+
+<div class="video">
+<iframe src="https://www.youtube.com/embed/zmgPOjEVgNY"></iframe>
+</div>
+
+<div class="video">
+<iframe src="https://www.youtube.com/embed/ZluWYUDNavM"></iframe>
+</div>
+
+</div>
 </div>
 
 <!-- FORM -->
 <div id="form" class="card">
-<h2>Votre demande</h2>
+<h2>Votre devis</h2>
 
-<input id="name" placeholder="Nom / Société">
-<input id="contact" placeholder="Instagram / Email">
-<input id="date" placeholder="Date du projet">
+<input id="name" placeholder="Nom">
+<input id="contact" placeholder="Email / Insta">
+<input id="date" placeholder="Date">
 <input id="message" placeholder="Message">
 </div>
 
@@ -285,58 +311,71 @@ transform:scale(1.03);
 <!-- TOTAL -->
 <div class="total">
 
-<div>Total estimatif</div>
+<div>Total estimé</div>
 <div class="total-price" id="total">200€</div>
 
-<a id="wa" class="whatsapp" target="_blank">
-Recevoir mon devis
-</a>
+<div class="btns">
+
+<button class="btn whatsapp" onclick="sendWA()">WhatsApp</button>
+<button class="btn pdf" onclick="generatePDF()">PDF</button>
+
+</div>
 
 </div>
 
 <script>
 
 function show(id){
-document.querySelectorAll(".card").forEach(c=>{
-c.classList.remove("active");
-});
+document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 update();
 }
 
 function update(){
 
-let active = document.querySelector(".card.active");
-let total = 0;
+let active=document.querySelector(".card.active");
+let total=0;
 
-// select price
-let select = active.querySelector("select");
-if(select){
-total += parseInt(select.value);
-}
+let sel=active.querySelector("select");
+if(sel) total+=parseInt(sel.value);
 
-// checkboxes
 active.querySelectorAll("input[type=checkbox]").forEach(c=>{
-if(c.checked) total += parseInt(c.value);
+if(c.checked) total+=parseInt(c.value);
 });
 
-// total display
-document.getElementById("total").innerText = total + "€";
+document.getElementById("total").innerText=total+"€";
+}
 
-// form
-let text =
-`PASTEL 2503
+function sendWA(){
 
+let text=`PASTEL 2503
 Nom: ${name.value}
 Contact: ${contact.value}
 Date: ${date.value}
 Message: ${message.value}
+Total: ${document.getElementById("total").innerText}`;
 
-Total: ${total}€`;
+window.open("https://wa.me/33759379324?text="+encodeURIComponent(text));
+}
 
-// whatsapp
-document.getElementById("wa").href =
-`https://wa.me/33759379324?text=${encodeURIComponent(text)}`;
+function generatePDF(){
+
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+
+doc.setFontSize(18);
+doc.text("PASTEL 2503 - DEVIS", 20, 20);
+
+doc.setFontSize(12);
+doc.text("Nom: "+name.value, 20, 40);
+doc.text("Contact: "+contact.value, 20, 50);
+doc.text("Date: "+date.value, 20, 60);
+doc.text("Message: "+message.value, 20, 70);
+
+doc.setFontSize(16);
+doc.text("Total: "+document.getElementById("total").innerText, 20, 90);
+
+doc.save("devis_pastel2503.pdf");
 }
 
 update();
