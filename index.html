@@ -14,25 +14,33 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#0d0d0d;
+background:linear-gradient(180deg,#141018,#0d0d0d);
 color:white;
-padding-bottom:180px;
+padding-bottom:200px;
 }
 
 /* HERO */
 .hero{
 text-align:center;
-padding:50px 20px;
+padding:60px 20px 30px;
 }
 
 .logo{
 width:120px;
 border-radius:16px;
-margin-bottom:10px;
+margin-bottom:12px;
+box-shadow:0 10px 35px rgba(247,183,195,0.15);
 }
 
-h1{font-size:2.3rem;}
-.subtitle{color:#aaa;margin-top:8px;}
+h1{
+font-size:2.4rem;
+letter-spacing:1px;
+}
+
+.subtitle{
+color:#cfcfcf;
+margin-top:8px;
+}
 
 /* NAV */
 .nav{
@@ -44,67 +52,122 @@ margin-top:25px;
 }
 
 .nav button{
-background:#181818;
-border:1px solid #333;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.12);
 color:white;
 padding:10px 14px;
-border-radius:12px;
+border-radius:14px;
 cursor:pointer;
+transition:0.25s;
+backdrop-filter: blur(10px);
 font-weight:bold;
-transition:0.2s;
 }
 
 .nav button:hover{
 background:#F7B7C3;
 color:black;
+transform:translateY(-2px);
 }
 
 /* CONTAINER */
 .container{
-max-width:800px;
+max-width:900px;
 margin:auto;
 padding:20px;
 }
 
-/* CARDS */
+/* CARD */
 .card{
 display:none;
-background:#181818;
-border:1px solid #242424;
-border-radius:16px;
+opacity:0;
+transform:translateY(20px);
+transition:0.5s ease;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
 padding:20px;
 margin-bottom:20px;
+backdrop-filter: blur(12px);
 }
 
 .card.active{
 display:block;
+opacity:1;
+transform:translateY(0);
 }
 
-h2{margin-bottom:10px;}
-p{color:#aaa;}
+/* TITRES */
+h2{
+margin-bottom:10px;
+color:#F7B7C3;
+}
 
-/* OPTIONS */
+p{
+color:#cfcfcf;
+margin-bottom:10px;
+}
+
+/* IMAGES */
+.service-img{
+width:100%;
+border-radius:14px;
+margin-bottom:15px;
+opacity:0.95;
+}
+
+/* OPTIONS (ALIGNEMENT CLEAN) */
 .option{
 display:flex;
 justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #222;
+align-items:center;
+padding:12px 12px;
+margin-top:8px;
+border-radius:12px;
+background:rgba(0,0,0,0.25);
+border:1px solid rgba(255,255,255,0.06);
+transition:0.2s;
 }
 
+.option:hover{
+border-color:rgba(247,183,195,0.4);
+transform:translateX(3px);
+}
+
+.option label{
+flex:1;
+}
+
+/* CHECKBOX */
 input[type=checkbox]{
-transform:scale(1.2);
+transform:scale(1.25);
+accent-color:#F7B7C3;
 }
 
-/* INPUTS */
+/* SELECT */
+select{
+width:100%;
+padding:12px;
+border-radius:12px;
+background:rgba(0,0,0,0.3);
+color:white;
+border:1px solid rgba(255,255,255,0.1);
+margin-top:10px;
+}
+
+/* FORM */
 input{
 width:100%;
 padding:12px;
 margin-top:8px;
-margin-bottom:10px;
-border-radius:10px;
-border:none;
-background:#0f0f0f;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(0,0,0,0.3);
 color:white;
+}
+
+input:focus{
+border-color:#F7B7C3;
+outline:none;
 }
 
 /* TOTAL */
@@ -113,8 +176,9 @@ position:fixed;
 bottom:0;
 left:0;
 right:0;
-background:#0f0f0f;
-border-top:1px solid #222;
+background:rgba(10,10,10,0.85);
+backdrop-filter: blur(12px);
+border-top:1px solid rgba(255,255,255,0.1);
 padding:18px;
 text-align:center;
 }
@@ -133,34 +197,40 @@ background:#25D366;
 color:white;
 text-decoration:none;
 padding:14px;
-border-radius:12px;
+border-radius:14px;
 font-weight:bold;
+transition:0.2s;
+}
+
+.whatsapp:hover{
+transform:scale(1.03);
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <div class="hero">
 <img class="logo" src="logo.png">
 <h1>PASTEL 2503</h1>
 <p class="subtitle">Production Audiovisuelle • Paris</p>
 
 <div class="nav">
-<button onclick="showService('reels')">Reels</button>
-<button onclick="showService('street')">Street Clip</button>
-<button onclick="showService('clip')">Clip Premium</button>
-<button onclick="showService('captation')">Devis</button>
+<button onclick="show('reels')">Reels</button>
+<button onclick="show('street')">Street Clip</button>
+<button onclick="show('premium')">Clip Premium</button>
+<button onclick="show('form')">Devis</button>
 </div>
 </div>
 
 <div class="container">
 
 <!-- REELS -->
-<div id="reels" class="card">
-<h2>Reels</h2>
+<div id="reels" class="card active">
+<h2>Reels — Contenu court</h2>
 
-<select id="service" onchange="updatePrice()">
+<select onchange="update()">
 <option value="200">1 Reel — 200€</option>
 <option value="300">2 Reels — 300€</option>
 <option value="400">3 Reels — 400€</option>
@@ -168,39 +238,46 @@ font-weight:bold;
 <option value="600">5 Reels — 600€</option>
 </select>
 
-<div class="option"><label>Sous-titres auto +25€</label><input type="checkbox" value="25" onchange="updatePrice()"></div>
-<div class="option"><label>Sous-titres animés +50€</label><input type="checkbox" value="50" onchange="updatePrice()"></div>
+<div class="option"><label>Sous-titres auto +25€</label><input type="checkbox" value="25" onchange="update()"></div>
+<div class="option"><label>Sous-titres animés +50€</label><input type="checkbox" value="50" onchange="update()"></div>
 </div>
 
 <!-- STREET -->
 <div id="street" class="card">
+<img class="service-img" src="https://i.imgur.com/yourstreet.jpg">
+
 <h2>Street Clip — 500€</h2>
+<p>6h tournage • FX3 • multi-lieux Paris</p>
 
-<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="updatePrice()"></div>
-<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="updatePrice()"></div>
-<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="updatePrice()"></div>
-<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="updatePrice()"></div>
-<div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
+<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
+<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
+<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
+<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
+<div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
 </div>
 
-<!-- CLIP PREMIUM -->
-<div id="clip" class="card">
+<!-- PREMIUM -->
+<div id="premium" class="card">
+<img class="service-img" src="https://i.imgur.com/yourpremium.jpg">
+
 <h2>Clip Premium — 800€</h2>
+<p>Storyboard • 8h tournage • 4K cinematic</p>
 
-<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="updatePrice()"></div>
-<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="updatePrice()"></div>
-<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="updatePrice()"></div>
-<div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
+<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
+<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
+<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
+<div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
+<div class="option"><label>VHS intégration +120€</label><input type="checkbox" value="120" onchange="update()"></div>
 </div>
 
-<!-- CAPTATION + FORM -->
-<div id="captation" class="card">
-<h2>Votre projet</h2>
+<!-- FORM -->
+<div id="form" class="card">
+<h2>Votre demande</h2>
 
 <input id="name" placeholder="Nom / Société">
 <input id="contact" placeholder="Instagram / Email">
 <input id="date" placeholder="Date du projet">
-<input id="message" placeholder="Message (optionnel)">
+<input id="message" placeholder="Message">
 </div>
 
 </div>
@@ -211,7 +288,7 @@ font-weight:bold;
 <div>Total estimatif</div>
 <div class="total-price" id="total">200€</div>
 
-<a id="whatsapp" class="whatsapp" target="_blank">
+<a id="wa" class="whatsapp" target="_blank">
 Recevoir mon devis
 </a>
 
@@ -219,57 +296,50 @@ Recevoir mon devis
 
 <script>
 
-function showService(id){
-
+function show(id){
 document.querySelectorAll(".card").forEach(c=>{
 c.classList.remove("active");
 });
-
 document.getElementById(id).classList.add("active");
-
-updatePrice();
+update();
 }
 
-function updatePrice(){
-
-let total = 0;
+function update(){
 
 let active = document.querySelector(".card.active");
+let total = 0;
 
-if(active && active.querySelector("#service")){
-total += parseInt(active.querySelector("#service").value);
+// select price
+let select = active.querySelector("select");
+if(select){
+total += parseInt(select.value);
 }
 
-document.querySelectorAll(".card.active input[type=checkbox]").forEach(c=>{
+// checkboxes
+active.querySelectorAll("input[type=checkbox]").forEach(c=>{
 if(c.checked) total += parseInt(c.value);
 });
 
+// total display
 document.getElementById("total").innerText = total + "€";
 
-let name = document.getElementById("name").value || "";
-let contact = document.getElementById("contact").value || "";
-let date = document.getElementById("date").value || "";
-let message = document.getElementById("message").value || "";
-
+// form
 let text =
-`Bonjour PASTEL 2503
+`PASTEL 2503
 
-Service sélectionné
+Nom: ${name.value}
+Contact: ${contact.value}
+Date: ${date.value}
+Message: ${message.value}
 
-Nom: ${name}
-Contact: ${contact}
-Date: ${date}
+Total: ${total}€`;
 
-Message:
-${message}
-
-Montant estimatif: ${total}€`;
-
-document.getElementById("whatsapp").href =
+// whatsapp
+document.getElementById("wa").href =
 `https://wa.me/33759379324?text=${encodeURIComponent(text)}`;
 }
 
-showService("reels");
+update();
 
 </script>
 
