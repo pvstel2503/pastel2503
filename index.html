@@ -96,7 +96,6 @@ opacity:1;
 transform:translateY(0);
 }
 
-/* TITLES */
 h2{
 color:#F7B7C3;
 margin-bottom:10px;
@@ -130,7 +129,6 @@ height:18px;
 accent-color:#F7B7C3;
 }
 
-/* SELECT */
 select{
 width:100%;
 padding:12px;
@@ -141,7 +139,6 @@ border:1px solid rgba(255,255,255,0.1);
 margin-top:10px;
 }
 
-/* PACK */
 .pack{
 margin-top:15px;
 padding:12px;
@@ -151,16 +148,33 @@ border-radius:10px;
 color:#ddd;
 }
 
-/* PORTFOLIO */
+/* =========================
+   PORTFOLIO PREMIUM UPGRADE
+========================= */
+
 .portfolio{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:12px;
+gap:22px;
+margin-top:10px;
+}
+
+.portfolio-item{
+position:relative;
+border-radius:16px;
+overflow:hidden;
+transition:0.35s ease;
+transform:scale(1);
+}
+
+.portfolio-item:hover{
+transform:scale(1.03);
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
 }
 
 .video{
-height:180px;
-border-radius:14px;
+height:200px;
+border-radius:16px;
 overflow:hidden;
 border:1px solid rgba(255,255,255,0.08);
 }
@@ -169,6 +183,28 @@ border:1px solid rgba(255,255,255,0.08);
 width:100%;
 height:100%;
 border:none;
+}
+
+/* BADGES */
+.badge{
+position:absolute;
+top:10px;
+left:10px;
+background:rgba(0,0,0,0.55);
+backdrop-filter: blur(10px);
+padding:6px 10px;
+border-radius:20px;
+font-size:11px;
+color:#F7B7C3;
+border:1px solid rgba(247,183,195,0.25);
+}
+
+/* LABEL */
+.portfolio-label{
+font-size:11px;
+color:#888;
+margin-top:6px;
+line-height:1.3;
 }
 
 /* TOTAL */
@@ -238,29 +274,28 @@ color:black;
 <div class="container">
 
 <!-- REELS -->
-<div id="reels" class="card active">
+<div id="reels" class="card">
+
 <h2>Reels — Contenu court</h2>
 
 <p>
 ✔ Jusqu’à 1h30 de tournage<br>
 ✔ Vidéo verticale 60 sec max<br>
 ✔ Montage + étalonnage<br>
-✔ Export réseaux sociaux<br>
-✔ 1 série de modifications
+✔ Export réseaux sociaux
 </p>
 
 <select onchange="update()">
 <option value="200">1 Reel — 200€</option>
-<option value="300">2 Reels (même session) — 300€</option>
-<option value="400">3 Reels — 400€</option>
-<option value="500">4 Reels — 500€</option>
-<option value="600">5 Reels — 600€</option>
+<option value="300">2 Reels (si même session) 300€</option>
+<option value="400">3 Reels (si même session) 400€</option>
+<option value="500">4 Reels (si même session) 500€</option>
+<option value="600">5 Reels (si même session) 600€</option>
 </select>
 
 <div class="option"><label>Sous-titres auto +25€</label><input type="checkbox" value="25" onchange="update()"></div>
 <div class="option"><label>Sous-titres animés +50€</label><input type="checkbox" value="50" onchange="update()"></div>
 
-<div class="pack">🔥 Recommandé : 3 reels + sous-titres animés</div>
 </div>
 
 <!-- STREET -->
@@ -268,21 +303,9 @@ color:black;
 
 <h2>Street Clip — 500€</h2>
 
-<p>
-✔ Jusqu’à 6h de tournage<br>
-✔ Multi-lieux Paris<br>
-✔ Sony FX3 cinéma<br>
-✔ Montage complet<br>
-✔ 1 reel inclus<br>
-</p>
-
-<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
-<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
-<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
-<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
 <div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
+<div class="option"><label>Backstage +100€</label><input type="checkbox" value="100" onchange="update()"></div>
 
-<div class="pack">🔥 Recommandé : VHS + Drone</div>
 </div>
 
 <!-- PREMIUM -->
@@ -290,23 +313,9 @@ color:black;
 
 <h2>Clip Premium — 800€</h2>
 
-<p>
-✔ Storyboard<br>
-✔ Jusqu’à 8h tournage<br>
-✔ Direction artistique<br>
-✔ Montage cinéma<br>
-✔ Livraison 4K<br>
-</p>
-
-<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="update()"></div>
-<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="update()"></div>
-<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="update()"></div>
-<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="update()"></div>
 <div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="update()"></div>
 <div class="option"><label>Backstage +100€</label><input type="checkbox" value="100" onchange="update()"></div>
-<div class="option"><label>Tournage nuit +50€</label><input type="checkbox" value="50" onchange="update()"></div>
 
-<div class="pack">🔥 Recommandé : FX + Drone + VHS</div>
 </div>
 
 <!-- PORTFOLIO -->
@@ -316,12 +325,26 @@ color:black;
 
 <div class="portfolio">
 
+<!-- STREET -->
+<div class="portfolio-item">
+<div class="badge">● Studio</div>
 <div class="video">
 <iframe src="https://www.youtube.com/embed/zmgPOjEVgNY"></iframe>
 </div>
+<div class="portfolio-label">
+Clip inclus dans l’offre Street Clip — 500€
+</div>
+</div>
 
+<!-- PREMIUM -->
+<div class="portfolio-item">
+<div class="badge">● Cinema</div>
 <div class="video">
 <iframe src="https://www.youtube.com/embed/ZluWYUDNavM"></iframe>
+</div>
+<div class="portfolio-label">
+Clip inclus dans l’offre Clip Premium — 800€
+</div>
 </div>
 
 </div>
@@ -351,47 +374,39 @@ document.getElementById(id).classList.add("active");
 update();
 }
 
-function getBase(active){
-
-if(active.id === "reels"){
-let select = active.querySelector("select");
-return parseInt(select.value);
-}
-
-return parseInt(active.dataset.base || 0);
-}
-
 function update(){
 
-let active = document.querySelector(".card.active");
-let total = getBase(active);
+let active=document.querySelector(".card.active");
+
+let total=0;
+
+if(active.querySelector("select")){
+total=parseInt(active.querySelector("select").value);
+}
+
+if(active.dataset.base){
+total=parseInt(active.dataset.base);
+}
 
 active.querySelectorAll("input[type=checkbox]").forEach(c=>{
-if(c.checked) total += parseInt(c.value);
+if(c.checked) total+=parseInt(c.value);
 });
 
-document.getElementById("total").innerText = total + "€";
+document.getElementById("total").innerText=total+"€";
 }
 
 function sendWA(){
-
-let text=`PASTEL 2503
-Total: ${document.getElementById("total").innerText}`;
-
+let text=`PASTEL 2503\nTotal: ${document.getElementById("total").innerText}`;
 window.open("https://wa.me/33759379324?text="+encodeURIComponent(text));
 }
 
 function generatePDF(){
-
 const { jsPDF } = window.jspdf;
 const doc = new jsPDF();
-
 doc.setFontSize(18);
 doc.text("PASTEL 2503 - DEVIS", 20, 20);
-
 doc.setFontSize(12);
 doc.text("Total: "+document.getElementById("total").innerText, 20, 40);
-
 doc.save("devis_pastel2503.pdf");
 }
 
