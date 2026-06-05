@@ -1,12 +1,254 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PASTEL 2503</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PASTEL 2503</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+padding-bottom:120px;
+}
+
+.hero{
+padding:40px 20px;
+text-align:center;
+}
+
+.logo{
+width:140px;
+border-radius:20px;
+margin-bottom:15px;
+}
+
+h1{
+font-size:2rem;
+}
+
+.subtitle{
+color:#bbb;
+margin-top:10px;
+}
+
+.container{
+padding:20px;
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:#181818;
+border-radius:20px;
+padding:20px;
+margin-bottom:20px;
+border:1px solid #242424;
+}
+
+.card h2{
+margin-bottom:10px;
+}
+
+.price{
+font-size:1.8rem;
+font-weight:bold;
+color:#F7B7C3;
+}
+
+select,
+input[type=checkbox]{
+margin-top:10px;
+}
+
+.option{
+margin-top:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.total{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#111;
+padding:20px;
+border-top:1px solid #333;
+text-align:center;
+}
+
+.total h3{
+font-size:14px;
+color:#aaa;
+}
+
+.total-price{
+font-size:2rem;
+font-weight:bold;
+margin-top:5px;
+}
+
+.whatsapp{
+display:block;
+width:100%;
+background:#25D366;
+color:white;
+text-decoration:none;
+padding:15px;
+border-radius:12px;
+margin-top:15px;
+font-weight:bold;
+}
+</style>
 </head>
+
 <body>
-    <h1>PASTEL 2503</h1>
-    <p>Site en construction.</p>
+
+<div class="hero">
+
+<img class="logo" src="https://i.imgur.com/YOURLOGO.png">
+
+<h1>PASTEL 2503</h1>
+
+<p class="subtitle">
+Production Audiovisuelle • Paris
+</p>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Choisir une prestation</h2>
+
+<select id="service" onchange="updatePrice()">
+
+<option value="200">Reel - 200€</option>
+
+<option value="500">Street Clip - 500€</option>
+
+<option value="800">Clip Musical - 800€</option>
+
+<option value="200">Captation - 200€</option>
+
+</select>
+
+</div>
+
+<div class="card">
+
+<h2>Options</h2>
+
+<div class="option">
+<label>2 reels promotionnels</label>
+<input type="checkbox" value="80" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>4 reels promotionnels</label>
+<input type="checkbox" value="140" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>Caméra VHS</label>
+<input type="checkbox" value="120" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>Drone</label>
+<input type="checkbox" value="150" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>Backstage</label>
+<input type="checkbox" value="100" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>Tournage après minuit</label>
+<input type="checkbox" value="50" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>Demi-journée supplémentaire</label>
+<input type="checkbox" value="150" onchange="updatePrice()">
+</div>
+
+<div class="option">
+<label>Livraison express</label>
+<input type="checkbox" value="150" onchange="updatePrice()">
+</div>
+
+</div>
+
+</div>
+
+<div class="total">
+
+<h3>Total estimatif TTC</h3>
+
+<div class="total-price" id="total">
+200€
+</div>
+
+<a
+id="whatsapp"
+class="whatsapp"
+target="_blank"
+href="#">
+Recevoir mon devis
+</a>
+
+</div>
+
+<script>
+
+function updatePrice(){
+
+let total =
+parseInt(
+document.getElementById("service").value
+);
+
+document
+.querySelectorAll("input[type=checkbox]")
+.forEach(box=>{
+
+if(box.checked){
+total += parseInt(box.value);
+}
+
+});
+
+document.getElementById("total").innerText =
+total + "€";
+
+let message =
+`Bonjour PASTEL 2503,
+
+Je souhaite un devis.
+
+Montant estimatif : ${total}€`;
+
+document.getElementById("whatsapp").href =
+`https://wa.me/33759379324?text=${encodeURIComponent(message)}`;
+
+}
+
+updatePrice();
+
+</script>
+
 </body>
 </html>
