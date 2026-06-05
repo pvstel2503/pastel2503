@@ -14,25 +14,26 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:linear-gradient(180deg,#0d0d0d,#111);
+background:radial-gradient(circle at top,#1a1a1a,#0d0d0d);
 color:white;
-padding-bottom:140px;
+padding-bottom:200px;
 }
 
 /* HERO */
 .hero{
-padding:50px 20px;
 text-align:center;
+padding:60px 20px 30px;
 }
 
 .logo{
 width:120px;
 border-radius:16px;
-margin-bottom:15px;
+margin-bottom:12px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
 h1{
-font-size:2.2rem;
+font-size:2.4rem;
 letter-spacing:1px;
 }
 
@@ -41,75 +42,101 @@ color:#aaa;
 margin-top:8px;
 }
 
-/* SERVICES BUTTONS */
-.services{
+/* NAV */
+.nav{
 display:flex;
-gap:10px;
 justify-content:center;
 flex-wrap:wrap;
+gap:10px;
 margin-top:25px;
 }
 
-.service-btn{
-padding:12px 18px;
-border-radius:12px;
-border:1px solid #333;
-background:#181818;
+.nav button{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
 color:white;
+padding:10px 14px;
+border-radius:14px;
 cursor:pointer;
-transition:0.2s;
 font-weight:bold;
+transition:0.25s;
+backdrop-filter: blur(10px);
 }
 
-.service-btn:hover{
+.nav button:hover{
 background:#F7B7C3;
 color:black;
-transform:scale(1.05);
+transform:translateY(-2px);
 }
 
 /* CONTAINER */
 .container{
-padding:20px;
-max-width:750px;
+max-width:850px;
 margin:auto;
-}
-
-/* CARDS */
-.card{
-background:#181818;
-border-radius:18px;
 padding:20px;
+}
+
+/* CARDS GLASS */
+.card{
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:22px;
 margin-bottom:20px;
-border:1px solid #242424;
+backdrop-filter: blur(12px);
+opacity:0;
+transform:translateY(20px);
+animation:fadeIn 0.6s forwards;
 }
 
-.card h2{
-margin-bottom:12px;
+.card:nth-child(1){animation-delay:0.1s}
+.card:nth-child(2){animation-delay:0.2s}
+.card:nth-child(3){animation-delay:0.3s}
+.card:nth-child(4){animation-delay:0.4s}
+
+@keyframes fadeIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
-/* PRICE SELECT */
-select{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:none;
-margin-top:10px;
-background:#0f0f0f;
-color:white;
+h2{
+margin-bottom:10px;
+}
+
+p{
+color:#aaa;
+line-height:1.4;
 }
 
 /* OPTIONS */
 .option{
-margin-top:12px;
 display:flex;
 justify-content:space-between;
-align-items:center;
-padding:8px 0;
-border-bottom:1px solid #222;
+padding:10px 0;
+border-bottom:1px solid rgba(255,255,255,0.06);
 }
 
 input[type=checkbox]{
 transform:scale(1.2);
+}
+
+/* INPUTS */
+input{
+width:100%;
+padding:12px;
+margin-top:8px;
+margin-bottom:10px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.1);
+background:rgba(0,0,0,0.3);
+color:white;
+outline:none;
+}
+
+input:focus{
+border-color:#F7B7C3;
 }
 
 /* TOTAL BAR */
@@ -118,116 +145,110 @@ position:fixed;
 bottom:0;
 left:0;
 right:0;
-background:#0f0f0f;
+background:rgba(10,10,10,0.85);
+backdrop-filter: blur(12px);
+border-top:1px solid rgba(255,255,255,0.1);
 padding:18px;
-border-top:1px solid #222;
 text-align:center;
-backdrop-filter: blur(10px);
-}
-
-.total h3{
-font-size:13px;
-color:#aaa;
 }
 
 .total-price{
 font-size:2rem;
-font-weight:bold;
 color:#F7B7C3;
+font-weight:bold;
 margin-top:5px;
 }
 
-/* BUTTON */
 .whatsapp{
 display:block;
-width:100%;
+margin-top:12px;
 background:#25D366;
 color:white;
 text-decoration:none;
 padding:14px;
-border-radius:12px;
-margin-top:12px;
+border-radius:14px;
 font-weight:bold;
 transition:0.2s;
 }
 
 .whatsapp:hover{
-transform:scale(1.02);
+transform:scale(1.03);
 }
 
-/* SECTIONS */
-.section{
-scroll-margin-top:80px;
+/* SMOOTH SCROLL OFFSET */
+html{
+scroll-behavior:smooth;
+scroll-padding-top:80px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <div class="hero">
-
 <img class="logo" src="logo.png">
-
 <h1>PASTEL 2503</h1>
-
 <p class="subtitle">Production Audiovisuelle • Paris</p>
 
-<div class="services">
-
-<button class="service-btn" onclick="document.getElementById('reels').scrollIntoView({behavior:'smooth'})">
-Reels
-</button>
-
-<button class="service-btn" onclick="document.getElementById('street').scrollIntoView({behavior:'smooth'})">
-Street Clip
-</button>
-
-<button class="service-btn" onclick="document.getElementById('clip').scrollIntoView({behavior:'smooth'})">
-Clip Preneur
-</button>
-
+<div class="nav">
+<button onclick="go('reels')">Reels</button>
+<button onclick="go('street')">Street Clip</button>
+<button onclick="go('clip')">Clip Musical</button>
+<button onclick="go('form')">Devis</button>
 </div>
-
 </div>
 
 <div class="container">
 
-<!-- SECTION REELS -->
-<div id="reels" class="card section">
-
+<!-- REELS -->
+<div id="reels" class="card">
 <h2>Reels</h2>
+<p>Contenu court optimisé réseaux</p>
 
 <select id="service" onchange="updatePrice()">
-<option value="200">Reel - 200€</option>
-<option value="500">Street Clip - 500€</option>
-<option value="800">Clip Musical - 800€</option>
-<option value="200">Captation - 200€</option>
+<option value="200">1 Reel — 200€</option>
+<option value="300">2 Reels — 300€</option>
+<option value="400">3 Reels — 400€</option>
+<option value="500">4 Reels — 500€</option>
+<option value="600">5 Reels — 600€</option>
 </select>
 
+<div class="option"><label>Sous-titres auto (+25€)</label><input type="checkbox" value="25" onchange="updatePrice()"></div>
+<div class="option"><label>Sous-titres animés (+50€)</label><input type="checkbox" value="50" onchange="updatePrice()"></div>
 </div>
 
-<!-- OPTIONS -->
-<div id="street" class="card section">
+<!-- STREET -->
+<div id="street" class="card">
+<h2>Street Clip — 500€</h2>
+<p>Tournage multi-lieux Paris • FX3</p>
 
-<h2>Options</h2>
-
-<div class="option"><label>2 reels promotionnels</label><input type="checkbox" value="80" onchange="updatePrice()"></div>
-<div class="option"><label>4 reels promotionnels</label><input type="checkbox" value="140" onchange="updatePrice()"></div>
-<div class="option"><label>Caméra VHS</label><input type="checkbox" value="120" onchange="updatePrice()"></div>
-<div class="option"><label>Drone</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
-<div class="option"><label>Backstage</label><input type="checkbox" value="100" onchange="updatePrice()"></div>
-<div class="option"><label>Tournage après minuit</label><input type="checkbox" value="50" onchange="updatePrice()"></div>
-<div class="option"><label>Demi-journée supplémentaire</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
-<div class="option"><label>Livraison express</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
-
+<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="updatePrice()"></div>
+<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="updatePrice()"></div>
+<div class="option"><label>VHS +120€</label><input type="checkbox" value="120" onchange="updatePrice()"></div>
+<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="updatePrice()"></div>
+<div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
 </div>
 
 <!-- CLIP -->
-<div id="clip" class="card section">
-<h2>Clip Preneur</h2>
-<p style="color:#aaa">
-Choisis ton style de production et ajoute tes options.
-</p>
+<div id="clip" class="card">
+<h2>Clip Musical — 800€</h2>
+<p>Production complète 4K • storyboard</p>
+
+<div class="option"><label>2 reels +80€</label><input type="checkbox" value="80" onchange="updatePrice()"></div>
+<div class="option"><label>4 reels +140€</label><input type="checkbox" value="140" onchange="updatePrice()"></div>
+<div class="option"><label>FX avancés +200€</label><input type="checkbox" value="200" onchange="updatePrice()"></div>
+<div class="option"><label>Drone +150€</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
+</div>
+
+<!-- FORM -->
+<div id="form" class="card">
+<h2>Votre projet</h2>
+
+<input id="name" placeholder="Nom / Société">
+<input id="contact" placeholder="Instagram / Email">
+<input id="date" placeholder="Date du projet">
+<input id="message" placeholder="Message (optionnel)">
 </div>
 
 </div>
@@ -235,13 +256,10 @@ Choisis ton style de production et ajoute tes options.
 <!-- TOTAL -->
 <div class="total">
 
-<h3>Total estimatif TTC</h3>
+<div>Total estimatif</div>
 <div class="total-price" id="total">200€</div>
 
-<a id="whatsapp"
-class="whatsapp"
-target="_blank"
-href="#">
+<a id="whatsapp" class="whatsapp" target="_blank">
 Recevoir mon devis
 </a>
 
@@ -249,26 +267,39 @@ Recevoir mon devis
 
 <script>
 
+function go(id){
+document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
 function updatePrice(){
 
 let total = parseInt(document.getElementById("service").value);
 
-document.querySelectorAll("input[type=checkbox]").forEach(box=>{
-if(box.checked){
-total += parseInt(box.value);
-}
+document.querySelectorAll("input[type=checkbox]").forEach(c=>{
+if(c.checked) total += parseInt(c.value);
 });
 
 document.getElementById("total").innerText = total + "€";
 
-let message = `Bonjour PASTEL 2503,
+let name = document.getElementById("name").value;
+let contact = document.getElementById("contact").value;
+let date = document.getElementById("date").value;
+let message = document.getElementById("message").value;
 
-Je souhaite un devis.
+let text =
+`Bonjour PASTEL 2503
 
-Montant estimatif : ${total}€`;
+Nom: ${name}
+Contact: ${contact}
+Date: ${date}
+
+Message:
+${message}
+
+Montant estimatif: ${total}€`;
 
 document.getElementById("whatsapp").href =
-`https://wa.me/33759379324?text=${encodeURIComponent(message)}`;
+`https://wa.me/33759379324?text=${encodeURIComponent(text)}`;
 }
 
 updatePrice();
