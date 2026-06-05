@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PASTEL 2503</title>
 
 <style>
@@ -15,99 +14,150 @@ font-family:Arial,sans-serif;
 }
 
 body{
-background:#0d0d0d;
+background:linear-gradient(180deg,#0d0d0d,#111);
 color:white;
-padding-bottom:120px;
+padding-bottom:140px;
 }
 
+/* HERO */
 .hero{
-padding:40px 20px;
+padding:50px 20px;
 text-align:center;
 }
 
 .logo{
-width:140px;
-border-radius:20px;
+width:120px;
+border-radius:16px;
 margin-bottom:15px;
 }
 
 h1{
-font-size:2rem;
+font-size:2.2rem;
+letter-spacing:1px;
 }
 
 .subtitle{
-color:#bbb;
-margin-top:10px;
+color:#aaa;
+margin-top:8px;
 }
 
+/* SERVICES BUTTONS */
+.services{
+display:flex;
+gap:10px;
+justify-content:center;
+flex-wrap:wrap;
+margin-top:25px;
+}
+
+.service-btn{
+padding:12px 18px;
+border-radius:12px;
+border:1px solid #333;
+background:#181818;
+color:white;
+cursor:pointer;
+transition:0.2s;
+font-weight:bold;
+}
+
+.service-btn:hover{
+background:#F7B7C3;
+color:black;
+transform:scale(1.05);
+}
+
+/* CONTAINER */
 .container{
 padding:20px;
-max-width:700px;
+max-width:750px;
 margin:auto;
 }
 
+/* CARDS */
 .card{
 background:#181818;
-border-radius:20px;
+border-radius:18px;
 padding:20px;
 margin-bottom:20px;
 border:1px solid #242424;
 }
 
 .card h2{
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
-.price{
-font-size:1.8rem;
-font-weight:bold;
-color:#F7B7C3;
-}
-
-select,
-input[type=checkbox]{
+/* PRICE SELECT */
+select{
+width:100%;
+padding:12px;
+border-radius:10px;
+border:none;
 margin-top:10px;
+background:#0f0f0f;
+color:white;
 }
 
+/* OPTIONS */
 .option{
-margin-top:15px;
+margin-top:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+padding:8px 0;
+border-bottom:1px solid #222;
 }
 
+input[type=checkbox]{
+transform:scale(1.2);
+}
+
+/* TOTAL BAR */
 .total{
 position:fixed;
 bottom:0;
 left:0;
 right:0;
-background:#111;
-padding:20px;
-border-top:1px solid #333;
+background:#0f0f0f;
+padding:18px;
+border-top:1px solid #222;
 text-align:center;
+backdrop-filter: blur(10px);
 }
 
 .total h3{
-font-size:14px;
+font-size:13px;
 color:#aaa;
 }
 
 .total-price{
 font-size:2rem;
 font-weight:bold;
+color:#F7B7C3;
 margin-top:5px;
 }
 
+/* BUTTON */
 .whatsapp{
 display:block;
 width:100%;
 background:#25D366;
 color:white;
 text-decoration:none;
-padding:15px;
+padding:14px;
 border-radius:12px;
-margin-top:15px;
+margin-top:12px;
 font-weight:bold;
+transition:0.2s;
+}
+
+.whatsapp:hover{
+transform:scale(1.02);
+}
+
+/* SECTIONS */
+.section{
+scroll-margin-top:80px;
 }
 </style>
 </head>
@@ -120,90 +170,75 @@ font-weight:bold;
 
 <h1>PASTEL 2503</h1>
 
-<p class="subtitle">
-Production Audiovisuelle • Paris
-</p>
+<p class="subtitle">Production Audiovisuelle • Paris</p>
+
+<div class="services">
+
+<button class="service-btn" onclick="document.getElementById('reels').scrollIntoView({behavior:'smooth'})">
+Reels
+</button>
+
+<button class="service-btn" onclick="document.getElementById('street').scrollIntoView({behavior:'smooth'})">
+Street Clip
+</button>
+
+<button class="service-btn" onclick="document.getElementById('clip').scrollIntoView({behavior:'smooth'})">
+Clip Preneur
+</button>
+
+</div>
 
 </div>
 
 <div class="container">
 
-<div class="card">
+<!-- SECTION REELS -->
+<div id="reels" class="card section">
 
-<h2>Choisir une prestation</h2>
+<h2>Reels</h2>
 
 <select id="service" onchange="updatePrice()">
-
 <option value="200">Reel - 200€</option>
-
 <option value="500">Street Clip - 500€</option>
-
 <option value="800">Clip Musical - 800€</option>
-
 <option value="200">Captation - 200€</option>
-
 </select>
 
 </div>
 
-<div class="card">
+<!-- OPTIONS -->
+<div id="street" class="card section">
 
 <h2>Options</h2>
 
-<div class="option">
-<label>2 reels promotionnels</label>
-<input type="checkbox" value="80" onchange="updatePrice()">
+<div class="option"><label>2 reels promotionnels</label><input type="checkbox" value="80" onchange="updatePrice()"></div>
+<div class="option"><label>4 reels promotionnels</label><input type="checkbox" value="140" onchange="updatePrice()"></div>
+<div class="option"><label>Caméra VHS</label><input type="checkbox" value="120" onchange="updatePrice()"></div>
+<div class="option"><label>Drone</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
+<div class="option"><label>Backstage</label><input type="checkbox" value="100" onchange="updatePrice()"></div>
+<div class="option"><label>Tournage après minuit</label><input type="checkbox" value="50" onchange="updatePrice()"></div>
+<div class="option"><label>Demi-journée supplémentaire</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
+<div class="option"><label>Livraison express</label><input type="checkbox" value="150" onchange="updatePrice()"></div>
+
 </div>
 
-<div class="option">
-<label>4 reels promotionnels</label>
-<input type="checkbox" value="140" onchange="updatePrice()">
-</div>
-
-<div class="option">
-<label>Caméra VHS</label>
-<input type="checkbox" value="120" onchange="updatePrice()">
-</div>
-
-<div class="option">
-<label>Drone</label>
-<input type="checkbox" value="150" onchange="updatePrice()">
-</div>
-
-<div class="option">
-<label>Backstage</label>
-<input type="checkbox" value="100" onchange="updatePrice()">
-</div>
-
-<div class="option">
-<label>Tournage après minuit</label>
-<input type="checkbox" value="50" onchange="updatePrice()">
-</div>
-
-<div class="option">
-<label>Demi-journée supplémentaire</label>
-<input type="checkbox" value="150" onchange="updatePrice()">
-</div>
-
-<div class="option">
-<label>Livraison express</label>
-<input type="checkbox" value="150" onchange="updatePrice()">
+<!-- CLIP -->
+<div id="clip" class="card section">
+<h2>Clip Preneur</h2>
+<p style="color:#aaa">
+Choisis ton style de production et ajoute tes options.
+</p>
 </div>
 
 </div>
 
-</div>
-
+<!-- TOTAL -->
 <div class="total">
 
 <h3>Total estimatif TTC</h3>
+<div class="total-price" id="total">200€</div>
 
-<div class="total-price" id="total">
-200€
-</div>
-
-<a
-id="whatsapp"
+<a id="whatsapp"
 class="whatsapp"
 target="_blank"
 href="#">
@@ -216,26 +251,17 @@ Recevoir mon devis
 
 function updatePrice(){
 
-let total =
-parseInt(
-document.getElementById("service").value
-);
+let total = parseInt(document.getElementById("service").value);
 
-document
-.querySelectorAll("input[type=checkbox]")
-.forEach(box=>{
-
+document.querySelectorAll("input[type=checkbox]").forEach(box=>{
 if(box.checked){
 total += parseInt(box.value);
 }
-
 });
 
-document.getElementById("total").innerText =
-total + "€";
+document.getElementById("total").innerText = total + "€";
 
-let message =
-`Bonjour PASTEL 2503,
+let message = `Bonjour PASTEL 2503,
 
 Je souhaite un devis.
 
@@ -243,7 +269,6 @@ Montant estimatif : ${total}€`;
 
 document.getElementById("whatsapp").href =
 `https://wa.me/33759379324?text=${encodeURIComponent(message)}`;
-
 }
 
 updatePrice();
